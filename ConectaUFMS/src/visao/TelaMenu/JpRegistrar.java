@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package view.TelaMenu;
+package visao.TelaMenu;
 
 import java.awt.event.ActionListener;
 
@@ -41,11 +41,11 @@ public class JpRegistrar extends javax.swing.JPanel {
 
         jPanel2 = new javax.swing.JPanel();
         jlCadastrar = new javax.swing.JLabel();
-        myTextField1 = new view.Componentes.MyTextField();
-        myTextField2 = new view.Componentes.MyTextField();
-        myPasswordField1 = new view.Componentes.MyPasswordField();
-        myPasswordField2 = new view.Componentes.MyPasswordField();
-        myButton1 = new view.Componentes.MyButton();
+        myTextField1 = new visao.Componentes.MyTextField();
+        myTextField2 = new visao.Componentes.MyTextField();
+        myPasswordField1 = new visao.Componentes.MyPasswordField();
+        myPasswordField2 = new visao.Componentes.MyPasswordField();
+        myButton1 = new visao.Componentes.MyButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -204,10 +204,10 @@ public class JpRegistrar extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton jbLogin;
     private javax.swing.JLabel jlCadastrar;
-    private view.Componentes.MyButton myButton1;
-    private view.Componentes.MyPasswordField myPasswordField1;
-    private view.Componentes.MyPasswordField myPasswordField2;
-    private view.Componentes.MyTextField myTextField1;
-    private view.Componentes.MyTextField myTextField2;
+    private visao.Componentes.MyButton myButton1;
+    private visao.Componentes.MyPasswordField myPasswordField1;
+    private visao.Componentes.MyPasswordField myPasswordField2;
+    private visao.Componentes.MyTextField myTextField1;
+    private visao.Componentes.MyTextField myTextField2;
     // End of variables declaration//GEN-END:variables
 }

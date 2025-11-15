@@ -81,7 +81,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="view.Componentes.MyTextField" name="myTextField1">
+        <Component class="visao.Componentes.MyTextField" name="myTextField1">
           <Properties>
             <Property name="text" type="java.lang.String" value="myTextField1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -100,7 +100,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="view.Componentes.MyTextField" name="myTextField2">
+        <Component class="visao.Componentes.MyTextField" name="myTextField2">
           <Properties>
             <Property name="text" type="java.lang.String" value="myTextField2"/>
             <Property name="imagem" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -122,7 +122,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="view.Componentes.MyPasswordField" name="myPasswordField1">
+        <Component class="visao.Componentes.MyPasswordField" name="myPasswordField1">
           <Properties>
             <Property name="text" type="java.lang.String" value="myPasswordField1"/>
             <Property name="imagem" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -144,7 +144,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="view.Componentes.MyPasswordField" name="myPasswordField2">
+        <Component class="visao.Componentes.MyPasswordField" name="myPasswordField2">
           <Properties>
             <Property name="text" type="java.lang.String" value="myPasswordField2"/>
             <Property name="imagem" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -166,7 +166,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="view.Componentes.MyButton" name="myButton1">
+        <Component class="visao.Componentes.MyButton" name="myButton1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cadastrar"/>
           </Properties>

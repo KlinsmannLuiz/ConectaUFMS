@@ -76,7 +76,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="view.Componentes.MyTextField" name="myTextField1">
+        <Component class="visao.Componentes.MyTextField" name="myTextField1">
           <Properties>
             <Property name="text" type="java.lang.String" value="myTextField1"/>
             <Property name="imagem" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -92,7 +92,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="view.Componentes.MyPasswordField" name="myPasswordField1">
+        <Component class="visao.Componentes.MyPasswordField" name="myPasswordField1">
           <Properties>
             <Property name="text" type="java.lang.String" value="myPasswordField1"/>
             <Property name="imagem" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -108,7 +108,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="view.Componentes.MyButton" name="jbBotaoAcessar">
+        <Component class="visao.Componentes.MyButton" name="jbBotaoAcessar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Acessar"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">

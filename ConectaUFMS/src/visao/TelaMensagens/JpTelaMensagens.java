@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view.TelaMensagens;
+package visao.TelaMensagens;
 
 /**
  *
@@ -28,7 +28,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jpMenuLateralEsquerdo1 = new view.TelaMensagens.JpMenuLateralEsquerdo();
+        jpMenuLateralEsquerdo1 = new visao.TelaMensagens.JpMenuLateralEsquerdo();
         JPainelContatos = new javax.swing.JPanel();
         JpLogoProjeto = new javax.swing.JPanel();
         jlConectaUFMS = new javax.swing.JLabel();
@@ -228,6 +228,6 @@ public class JpTelaMensagens extends javax.swing.JFrame {
     private javax.swing.JPanel JpLogoProjeto;
     private javax.swing.JPanel JpPerfilContato;
     private javax.swing.JLabel jlConectaUFMS;
-    private view.TelaMensagens.JpMenuLateralEsquerdo jpMenuLateralEsquerdo1;
+    private visao.TelaMensagens.JpMenuLateralEsquerdo jpMenuLateralEsquerdo1;
     // End of variables declaration//GEN-END:variables
 }

@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view.TelaMenu;
+package visao.TelaMenu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import view.TelaMenu.JPainelSlide;
+import visao.TelaMenu.JPainelSlide;
 /**
  *
  * @author Usuario
@@ -56,10 +56,10 @@ public class JpTelaLoginRegistro extends javax.swing.JFrame {
 
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel1 = new javax.swing.JPanel();
-        JPainelConectaUFMS = new view.TelaMenu.JPainelConectaUFMS();
+        JPainelConectaUFMS = new visao.TelaMenu.JPainelConectaUFMS();
         JPainelAjuste = new javax.swing.JPanel();
-        jPainelBorda = new view.TelaMenu.JPainelBorda();
-        jpPainelSlide = new view.TelaMenu.JPainelSlide();
+        jPainelBorda = new visao.TelaMenu.JPainelBorda();
+        jpPainelSlide = new visao.TelaMenu.JPainelSlide();
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -174,10 +174,10 @@ public class JpTelaLoginRegistro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPainelAjuste;
-    private view.TelaMenu.JPainelConectaUFMS JPainelConectaUFMS;
+    private visao.TelaMenu.JPainelConectaUFMS JPainelConectaUFMS;
     private javax.swing.JLayeredPane jLayeredPane1;
-    private view.TelaMenu.JPainelBorda jPainelBorda;
+    private visao.TelaMenu.JPainelBorda jPainelBorda;
     private javax.swing.JPanel jPanel1;
-    private view.TelaMenu.JPainelSlide jpPainelSlide;
+    private visao.TelaMenu.JPainelSlide jpPainelSlide;
     // End of variables declaration//GEN-END:variables
 }

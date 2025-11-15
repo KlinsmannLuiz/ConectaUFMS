@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package view.TelaMenu;
+package visao.TelaMenu;
 
 import java.awt.event.ActionListener;
 
@@ -41,9 +41,9 @@ public class JpLogin extends javax.swing.JPanel {
 
         jpPainelCima = new javax.swing.JPanel();
         jlLogin = new javax.swing.JLabel();
-        myTextField1 = new view.Componentes.MyTextField();
-        myPasswordField1 = new view.Componentes.MyPasswordField();
-        jbBotaoAcessar = new view.Componentes.MyButton();
+        myTextField1 = new visao.Componentes.MyTextField();
+        myPasswordField1 = new visao.Componentes.MyPasswordField();
+        jbBotaoAcessar = new visao.Componentes.MyButton();
         jlSenha = new javax.swing.JLabel();
         jlEmail = new javax.swing.JLabel();
         jpPainelBaixo = new javax.swing.JPanel();
@@ -149,14 +149,14 @@ public class JpLogin extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.Componentes.MyButton jbBotaoAcessar;
+    private visao.Componentes.MyButton jbBotaoAcessar;
     private javax.swing.JButton jlCadastrar;
     private javax.swing.JLabel jlEmail;
     private javax.swing.JLabel jlLogin;
     private javax.swing.JLabel jlSenha;
     private javax.swing.JPanel jpPainelBaixo;
     private javax.swing.JPanel jpPainelCima;
-    private view.Componentes.MyPasswordField myPasswordField1;
-    private view.Componentes.MyTextField myTextField1;
+    private visao.Componentes.MyPasswordField myPasswordField1;
+    private visao.Componentes.MyTextField myTextField1;
     // End of variables declaration//GEN-END:variables
 }
