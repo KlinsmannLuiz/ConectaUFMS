@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package view;
+package view.TelaMenu;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -14,30 +14,31 @@ import java.awt.RenderingHints;
  *
  * @author Usuario
  */
-public class JpMenuLateralDireitro extends javax.swing.JPanel {
+public class JPainelBorda extends javax.swing.JPanel {
 
     /**
-     * Creates new form JpMenuLateralDireitro
+     * Creates new form JPainelBorda
      */
-    public JpMenuLateralDireitro() {
+    public JPainelBorda() {
         initComponents();
         setOpaque(false);
     }
 
-    @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-
         Color corCima = new Color(0, 82, 122);
         Color corBaixo = new Color(60, 200, 230);
 
-        GradientPaint gra = new GradientPaint(0, getHeight() / 2, corCima, 0, getHeight(), corBaixo);
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        GradientPaint gra = new GradientPaint(0, 0, corCima, 0, getHeight(), corBaixo);
 
         g2d.setPaint(gra);
-        g2d.fillRect(0, 0, getWidth(), getHeight());
+        g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 10, 10);
+
+        g2d.setColor(Color.WHITE);
+        g2d.fillRoundRect(2, 2, getWidth() - 4, getHeight() - 4, 10, 10);
 
         super.paintComponent(g);
     }
