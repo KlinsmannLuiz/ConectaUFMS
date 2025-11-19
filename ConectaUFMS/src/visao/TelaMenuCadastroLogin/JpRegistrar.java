@@ -75,6 +75,7 @@ public class JpRegistrar extends javax.swing.JPanel {
         jPanel2.add(jlCadastrar, gridBagConstraints);
 
         myTextField1.setText("myTextField1");
+        myTextField1.setImagem(new javax.swing.ImageIcon(getClass().getResource("/visao/Imagens/usuario25px.png"))); // NOI18N
         myTextField1.setMaximumSize(new java.awt.Dimension(200, 35));
         myTextField1.setMinimumSize(new java.awt.Dimension(200, 35));
         myTextField1.setPreferredSize(new java.awt.Dimension(250, 35));
@@ -85,7 +86,7 @@ public class JpRegistrar extends javax.swing.JPanel {
         jPanel2.add(myTextField1, gridBagConstraints);
 
         myTextField2.setText("myTextField2");
-        myTextField2.setImagem(new javax.swing.ImageIcon(getClass().getResource("/view/Imagens/Email25px.png"))); // NOI18N
+        myTextField2.setImagem(new javax.swing.ImageIcon(getClass().getResource("/visao/Imagens/Email25px.png"))); // NOI18N
         myTextField2.setMaximumSize(new java.awt.Dimension(200, 35));
         myTextField2.setMinimumSize(new java.awt.Dimension(200, 35));
         myTextField2.setPreferredSize(new java.awt.Dimension(250, 35));
@@ -96,7 +97,7 @@ public class JpRegistrar extends javax.swing.JPanel {
         jPanel2.add(myTextField2, gridBagConstraints);
 
         myPasswordField1.setText("myPasswordField1");
-        myPasswordField1.setImagem(new javax.swing.ImageIcon(getClass().getResource("/view/Imagens/SenhaFechada25px.png"))); // NOI18N
+        myPasswordField1.setImagem(new javax.swing.ImageIcon(getClass().getResource("/visao/Imagens/SenhaFechada25px.png"))); // NOI18N
         myPasswordField1.setMaximumSize(new java.awt.Dimension(200, 35));
         myPasswordField1.setMinimumSize(new java.awt.Dimension(200, 35));
         myPasswordField1.setPreferredSize(new java.awt.Dimension(250, 35));
@@ -107,7 +108,7 @@ public class JpRegistrar extends javax.swing.JPanel {
         jPanel2.add(myPasswordField1, gridBagConstraints);
 
         myPasswordField2.setText("myPasswordField2");
-        myPasswordField2.setImagem(new javax.swing.ImageIcon(getClass().getResource("/view/Imagens/SenhaFechada25px.png"))); // NOI18N
+        myPasswordField2.setImagem(new javax.swing.ImageIcon(getClass().getResource("/visao/Imagens/SenhaFechada25px.png"))); // NOI18N
         myPasswordField2.setMaximumSize(new java.awt.Dimension(200, 35));
         myPasswordField2.setMinimumSize(new java.awt.Dimension(200, 35));
         myPasswordField2.setPreferredSize(new java.awt.Dimension(250, 35));

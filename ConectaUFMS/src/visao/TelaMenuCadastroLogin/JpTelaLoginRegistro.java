@@ -52,7 +52,6 @@ public class JpTelaLoginRegistro extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel1 = new javax.swing.JPanel();
@@ -75,7 +74,6 @@ public class JpTelaLoginRegistro extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
@@ -106,15 +104,15 @@ public class JpTelaLoginRegistro extends javax.swing.JFrame {
         jPainelBorda.setMinimumSize(new java.awt.Dimension(291, 450));
         jPainelBorda.setPreferredSize(new java.awt.Dimension(291, 450));
 
-        jpPainelSlide.setMaximumSize(new java.awt.Dimension(291, 425));
-        jpPainelSlide.setMinimumSize(new java.awt.Dimension(291, 425));
-        jpPainelSlide.setPreferredSize(new java.awt.Dimension(291, 425));
+        jpPainelSlide.setMaximumSize(new java.awt.Dimension(309, 425));
+        jpPainelSlide.setMinimumSize(new java.awt.Dimension(309, 425));
+        jpPainelSlide.setPreferredSize(new java.awt.Dimension(309, 425));
 
         javax.swing.GroupLayout jpPainelSlideLayout = new javax.swing.GroupLayout(jpPainelSlide);
         jpPainelSlide.setLayout(jpPainelSlideLayout);
         jpPainelSlideLayout.setHorizontalGroup(
             jpPainelSlideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 291, Short.MAX_VALUE)
+            .addGap(0, 309, Short.MAX_VALUE)
         );
         jpPainelSlideLayout.setVerticalGroup(
             jpPainelSlideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,8 +125,8 @@ public class JpTelaLoginRegistro extends javax.swing.JFrame {
             jPainelBordaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPainelBordaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jpPainelSlide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(jpPainelSlide, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPainelBordaLayout.setVerticalGroup(
             jPainelBordaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -45,10 +45,10 @@ public class JPainelConectaUFMS extends javax.swing.JPanel {
 
     public void carregarImagem() {
         try {
-            imagemLogo = new ImageIcon(getClass().getResource("../imagens/LogoProjeto350px.png")).getImage();
+            imagemLogo = new ImageIcon(getClass().getResource("../Imagens/LogoProjeto350px.png")).getImage();
 
             if (imagemLogo == null) {
-                imagemLogo = new ImageIcon("../imagens/LogoProjeto350px.png").getImage();
+                imagemLogo = new ImageIcon("../Imagens/LogoProjeto350px.png").getImage();
             }
         } catch (Exception e) {
             System.err.println("Erro ao carregar imagem: " + e.getMessage());

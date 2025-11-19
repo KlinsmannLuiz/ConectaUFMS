@@ -84,6 +84,9 @@
         <Component class="visao.Componentes.MyTextField" name="myTextField1">
           <Properties>
             <Property name="text" type="java.lang.String" value="myTextField1"/>
+            <Property name="imagem" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/visao/Imagens/usuario25px.png"/>
+            </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[200, 35]"/>
             </Property>
@@ -104,7 +107,7 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="myTextField2"/>
             <Property name="imagem" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/view/Imagens/Email25px.png"/>
+              <Image iconType="3" name="/visao/Imagens/Email25px.png"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[200, 35]"/>
@@ -126,7 +129,7 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="myPasswordField1"/>
             <Property name="imagem" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/view/Imagens/SenhaFechada25px.png"/>
+              <Image iconType="3" name="/visao/Imagens/SenhaFechada25px.png"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[200, 35]"/>
@@ -148,7 +151,7 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="myPasswordField2"/>
             <Property name="imagem" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/view/Imagens/SenhaFechada25px.png"/>
+              <Image iconType="3" name="/visao/Imagens/SenhaFechada25px.png"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[200, 35]"/>

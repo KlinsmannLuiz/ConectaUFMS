@@ -50,7 +50,7 @@ public class JpLogin extends javax.swing.JPanel {
         jlCadastrar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(248, 328));
+        setPreferredSize(new java.awt.Dimension(291, 420));
 
         jpPainelCima.setBackground(new java.awt.Color(255, 255, 255));
         jpPainelCima.setMaximumSize(new java.awt.Dimension(248, 288));
@@ -68,7 +68,7 @@ public class JpLogin extends javax.swing.JPanel {
         jpPainelCima.add(jlLogin, gridBagConstraints);
 
         myTextField1.setText("myTextField1");
-        myTextField1.setImagem(new javax.swing.ImageIcon(getClass().getResource("/view/Imagens/Email25px.png"))); // NOI18N
+        myTextField1.setImagem(new javax.swing.ImageIcon(getClass().getResource("/visao/Imagens/Email25px.png"))); // NOI18N
         myTextField1.setPreferredSize(new java.awt.Dimension(250, 35));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -78,7 +78,7 @@ public class JpLogin extends javax.swing.JPanel {
         jpPainelCima.add(myTextField1, gridBagConstraints);
 
         myPasswordField1.setText("myPasswordField1");
-        myPasswordField1.setImagem(new javax.swing.ImageIcon(getClass().getResource("/view/Imagens/SenhaFechada25px.png"))); // NOI18N
+        myPasswordField1.setImagem(new javax.swing.ImageIcon(getClass().getResource("/visao/Imagens/SenhaFechada25px.png"))); // NOI18N
         myPasswordField1.setPreferredSize(new java.awt.Dimension(250, 35));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -142,7 +142,7 @@ public class JpLogin extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jpPainelCima, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 85, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jpPainelBaixo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
