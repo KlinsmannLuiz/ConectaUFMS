@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package visao.TelaMenuCadastroLogin;
+package visao.TelaCadastroLogin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import visao.TelaMenuCadastroLogin.JPainelSlide;
+import visao.TelaCadastroLogin.JPainelSlide;
 /**
  *
  * @author Usuario
@@ -55,10 +55,10 @@ public class JpTelaLoginRegistro extends javax.swing.JFrame {
 
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel1 = new javax.swing.JPanel();
-        JPainelConectaUFMS = new visao.TelaMenuCadastroLogin.JPainelConectaUFMS();
+        JPainelConectaUFMS = new visao.TelaCadastroLogin.JPainelConectaUFMS();
         JPainelAjuste = new javax.swing.JPanel();
-        jPainelBorda = new visao.TelaMenuCadastroLogin.JPainelBorda();
-        jpPainelSlide = new visao.TelaMenuCadastroLogin.JPainelSlide();
+        jPainelBorda = new visao.TelaCadastroLogin.JPainelBorda();
+        jpPainelSlide = new visao.TelaCadastroLogin.JPainelSlide();
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -125,7 +125,7 @@ public class JpTelaLoginRegistro extends javax.swing.JFrame {
             jPainelBordaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPainelBordaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jpPainelSlide, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                .addComponent(jpPainelSlide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPainelBordaLayout.setVerticalGroup(
@@ -172,10 +172,10 @@ public class JpTelaLoginRegistro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPainelAjuste;
-    private visao.TelaMenuCadastroLogin.JPainelConectaUFMS JPainelConectaUFMS;
+    private visao.TelaCadastroLogin.JPainelConectaUFMS JPainelConectaUFMS;
     private javax.swing.JLayeredPane jLayeredPane1;
-    private visao.TelaMenuCadastroLogin.JPainelBorda jPainelBorda;
+    private visao.TelaCadastroLogin.JPainelBorda jPainelBorda;
     private javax.swing.JPanel jPanel1;
-    private visao.TelaMenuCadastroLogin.JPainelSlide jpPainelSlide;
+    private visao.TelaCadastroLogin.JPainelSlide jpPainelSlide;
     // End of variables declaration//GEN-END:variables
 }

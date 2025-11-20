@@ -58,7 +58,7 @@
         <Property name="axis" type="int" value="0"/>
       </Layout>
       <SubComponents>
-        <Container class="visao.TelaMenuCadastroLogin.JPainelConectaUFMS" name="JPainelConectaUFMS">
+        <Container class="visao.TelaCadastroLogin.JPainelConectaUFMS" name="JPainelConectaUFMS">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
@@ -97,7 +97,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
           <SubComponents>
-            <Container class="visao.TelaMenuCadastroLogin.JPainelBorda" name="jPainelBorda">
+            <Container class="visao.TelaCadastroLogin.JPainelBorda" name="jPainelBorda">
               <Properties>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[291, 450]"/>
@@ -120,7 +120,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jpPainelSlide" pref="309" max="32767" attributes="0"/>
+                          <Component id="jpPainelSlide" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -136,7 +136,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="visao.TelaMenuCadastroLogin.JPainelSlide" name="jpPainelSlide">
+                <Container class="visao.TelaCadastroLogin.JPainelSlide" name="jpPainelSlide">
                   <Properties>
                     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[309, 425]"/>

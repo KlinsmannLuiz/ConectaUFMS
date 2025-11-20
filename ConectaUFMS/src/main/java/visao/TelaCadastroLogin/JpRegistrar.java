@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package visao.TelaMenuCadastroLogin;
+package visao.TelaCadastroLogin;
 
 import java.awt.event.ActionListener;
 
@@ -74,8 +74,6 @@ public class JpRegistrar extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel2.add(jlCadastrar, gridBagConstraints);
 
-        myTextField1.setText("myTextField1");
-        myTextField1.setImagem(new javax.swing.ImageIcon(getClass().getResource("/visao/Imagens/usuario25px.png"))); // NOI18N
         myTextField1.setMaximumSize(new java.awt.Dimension(200, 35));
         myTextField1.setMinimumSize(new java.awt.Dimension(200, 35));
         myTextField1.setPreferredSize(new java.awt.Dimension(250, 35));
@@ -85,19 +83,20 @@ public class JpRegistrar extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel2.add(myTextField1, gridBagConstraints);
 
-        myTextField2.setText("myTextField2");
-        myTextField2.setImagem(new javax.swing.ImageIcon(getClass().getResource("/visao/Imagens/Email25px.png"))); // NOI18N
         myTextField2.setMaximumSize(new java.awt.Dimension(200, 35));
         myTextField2.setMinimumSize(new java.awt.Dimension(200, 35));
         myTextField2.setPreferredSize(new java.awt.Dimension(250, 35));
+        myTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myTextField2ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel2.add(myTextField2, gridBagConstraints);
 
-        myPasswordField1.setText("myPasswordField1");
-        myPasswordField1.setImagem(new javax.swing.ImageIcon(getClass().getResource("/visao/Imagens/SenhaFechada25px.png"))); // NOI18N
         myPasswordField1.setMaximumSize(new java.awt.Dimension(200, 35));
         myPasswordField1.setMinimumSize(new java.awt.Dimension(200, 35));
         myPasswordField1.setPreferredSize(new java.awt.Dimension(250, 35));
@@ -107,8 +106,6 @@ public class JpRegistrar extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel2.add(myPasswordField1, gridBagConstraints);
 
-        myPasswordField2.setText("myPasswordField2");
-        myPasswordField2.setImagem(new javax.swing.ImageIcon(getClass().getResource("/visao/Imagens/SenhaFechada25px.png"))); // NOI18N
         myPasswordField2.setMaximumSize(new java.awt.Dimension(200, 35));
         myPasswordField2.setMinimumSize(new java.awt.Dimension(200, 35));
         myPasswordField2.setPreferredSize(new java.awt.Dimension(250, 35));
@@ -194,6 +191,10 @@ public class JpRegistrar extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void myTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_myTextField2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

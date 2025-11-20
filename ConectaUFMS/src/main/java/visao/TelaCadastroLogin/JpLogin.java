@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package visao.TelaMenuCadastroLogin;
+package visao.TelaCadastroLogin;
 
 import java.awt.event.ActionListener;
 
@@ -67,8 +67,6 @@ public class JpLogin extends javax.swing.JPanel {
         gridBagConstraints.gridy = 0;
         jpPainelCima.add(jlLogin, gridBagConstraints);
 
-        myTextField1.setText("myTextField1");
-        myTextField1.setImagem(new javax.swing.ImageIcon(getClass().getResource("/visao/Imagens/Email25px.png"))); // NOI18N
         myTextField1.setPreferredSize(new java.awt.Dimension(250, 35));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -77,8 +75,6 @@ public class JpLogin extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jpPainelCima.add(myTextField1, gridBagConstraints);
 
-        myPasswordField1.setText("myPasswordField1");
-        myPasswordField1.setImagem(new javax.swing.ImageIcon(getClass().getResource("/visao/Imagens/SenhaFechada25px.png"))); // NOI18N
         myPasswordField1.setPreferredSize(new java.awt.Dimension(250, 35));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
