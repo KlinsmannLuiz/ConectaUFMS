@@ -4,14 +4,17 @@
  */
 package visao.TelaCadastroLogin;
 
+import Vo.VoLoginAluno;
 import java.awt.event.ActionListener;
+import regrasDeNegocio.LoginAlunoRN;
 
 /**
  *
  * @author Usuario
  */
 public class JpLogin extends javax.swing.JPanel {
-
+    private VoLoginAluno loginAluno;
+    
     /**
      * Creates new form jpLogin
      */
@@ -41,8 +44,8 @@ public class JpLogin extends javax.swing.JPanel {
 
         jpPainelCima = new javax.swing.JPanel();
         jlLogin = new javax.swing.JLabel();
-        myTextField1 = new visao.Componentes.MyTextField();
-        myPasswordField1 = new visao.Componentes.MyPasswordField();
+        mtfEmailLogin = new visao.Componentes.MyTextField();
+        mtfSenhaLogin = new visao.Componentes.MyPasswordField();
         jbBotaoAcessar = new visao.Componentes.MyButton();
         jlSenha = new javax.swing.JLabel();
         jlEmail = new javax.swing.JLabel();
@@ -67,25 +70,32 @@ public class JpLogin extends javax.swing.JPanel {
         gridBagConstraints.gridy = 0;
         jpPainelCima.add(jlLogin, gridBagConstraints);
 
-        myTextField1.setPreferredSize(new java.awt.Dimension(250, 35));
+        mtfEmailLogin.setImagem(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Email25px.png"))); // NOI18N
+        mtfEmailLogin.setPreferredSize(new java.awt.Dimension(250, 35));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        jpPainelCima.add(myTextField1, gridBagConstraints);
+        jpPainelCima.add(mtfEmailLogin, gridBagConstraints);
 
-        myPasswordField1.setPreferredSize(new java.awt.Dimension(250, 35));
+        mtfSenhaLogin.setImagem(new javax.swing.ImageIcon(getClass().getResource("/Imagens/SenhaFechada25px.png"))); // NOI18N
+        mtfSenhaLogin.setPreferredSize(new java.awt.Dimension(250, 35));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        jpPainelCima.add(myPasswordField1, gridBagConstraints);
+        jpPainelCima.add(mtfSenhaLogin, gridBagConstraints);
 
         jbBotaoAcessar.setText("Acessar");
         jbBotaoAcessar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbBotaoAcessar.setMinimumSize(new java.awt.Dimension(90, 30));
+        jbBotaoAcessar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBotaoAcessarActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -143,6 +153,16 @@ public class JpLogin extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbBotaoAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBotaoAcessarActionPerformed
+        this.loginAluno = new VoLoginAluno(
+                mtfEmailLogin.getText(),
+                mtfSenhaLogin.getPassword()
+        );
+        
+        LoginAlunoRN loginAlunoRN = new LoginAlunoRN(this.loginAluno);
+       
+    }//GEN-LAST:event_jbBotaoAcessarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private visao.Componentes.MyButton jbBotaoAcessar;
@@ -152,7 +172,7 @@ public class JpLogin extends javax.swing.JPanel {
     private javax.swing.JLabel jlSenha;
     private javax.swing.JPanel jpPainelBaixo;
     private javax.swing.JPanel jpPainelCima;
-    private visao.Componentes.MyPasswordField myPasswordField1;
-    private visao.Componentes.MyTextField myTextField1;
+    private visao.Componentes.MyTextField mtfEmailLogin;
+    private visao.Componentes.MyPasswordField mtfSenhaLogin;
     // End of variables declaration//GEN-END:variables
 }

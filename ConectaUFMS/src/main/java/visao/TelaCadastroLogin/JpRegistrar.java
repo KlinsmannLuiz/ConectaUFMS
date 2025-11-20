@@ -4,29 +4,33 @@
  */
 package visao.TelaCadastroLogin;
 
+import Vo.VoCadastrandoUsuario;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import regrasDeNegocio.CadastrandoAlunoRN;
 
 /**
  *
  * @author Usuario
  */
 public class JpRegistrar extends javax.swing.JPanel {
-
+    
+    VoCadastrandoUsuario voCadUsu;
     /**
      * Creates new form jpRegistrar
      */
     public JpRegistrar() {
         initComponents();
-        jbLogin.setFocusPainted(false);
-        jbLogin.setBorderPainted(false);
-        jbLogin.setContentAreaFilled(false);
-        jbLogin.setOpaque(false);
-        jbLogin.setBackground(null);
-        jbLogin.setBorder(null);
+        jbVoltarLogin.setFocusPainted(false);
+        jbVoltarLogin.setBorderPainted(false);
+        jbVoltarLogin.setContentAreaFilled(false);
+        jbVoltarLogin.setOpaque(false);
+        jbVoltarLogin.setBackground(null);
+        jbVoltarLogin.setBorder(null);
     }
 
     public void addEventoVoltarLogin(ActionListener acv) {
-        jbLogin.addActionListener(acv);
+        jbVoltarLogin.addActionListener(acv);
     }
 
     /**
@@ -41,17 +45,17 @@ public class JpRegistrar extends javax.swing.JPanel {
 
         jPanel2 = new javax.swing.JPanel();
         jlCadastrar = new javax.swing.JLabel();
-        myTextField1 = new visao.Componentes.MyTextField();
-        myTextField2 = new visao.Componentes.MyTextField();
-        myPasswordField1 = new visao.Componentes.MyPasswordField();
-        myPasswordField2 = new visao.Componentes.MyPasswordField();
-        myButton1 = new visao.Componentes.MyButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        mtfUsuario = new visao.Componentes.MyTextField();
+        mtfEmail = new visao.Componentes.MyTextField();
+        mtfSenha = new visao.Componentes.MyPasswordField();
+        mtfConfirSenha = new visao.Componentes.MyPasswordField();
+        mtbtCadastras = new visao.Componentes.MyButton();
+        JlNomeDeUsuario = new javax.swing.JLabel();
+        jlEmail = new javax.swing.JLabel();
+        jlSenha = new javax.swing.JLabel();
+        jlSenhaNovamente = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jbLogin = new javax.swing.JButton();
+        jbVoltarLogin = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(291, 420));
@@ -74,93 +78,102 @@ public class JpRegistrar extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel2.add(jlCadastrar, gridBagConstraints);
 
-        myTextField1.setMaximumSize(new java.awt.Dimension(200, 35));
-        myTextField1.setMinimumSize(new java.awt.Dimension(200, 35));
-        myTextField1.setPreferredSize(new java.awt.Dimension(250, 35));
+        mtfUsuario.setImagem(new javax.swing.ImageIcon(getClass().getResource("/Imagens/usuario25px.png"))); // NOI18N
+        mtfUsuario.setMaximumSize(new java.awt.Dimension(200, 35));
+        mtfUsuario.setMinimumSize(new java.awt.Dimension(200, 35));
+        mtfUsuario.setPreferredSize(new java.awt.Dimension(250, 35));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel2.add(myTextField1, gridBagConstraints);
+        jPanel2.add(mtfUsuario, gridBagConstraints);
 
-        myTextField2.setMaximumSize(new java.awt.Dimension(200, 35));
-        myTextField2.setMinimumSize(new java.awt.Dimension(200, 35));
-        myTextField2.setPreferredSize(new java.awt.Dimension(250, 35));
-        myTextField2.addActionListener(new java.awt.event.ActionListener() {
+        mtfEmail.setImagem(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Email25px.png"))); // NOI18N
+        mtfEmail.setMaximumSize(new java.awt.Dimension(200, 35));
+        mtfEmail.setMinimumSize(new java.awt.Dimension(200, 35));
+        mtfEmail.setPreferredSize(new java.awt.Dimension(250, 35));
+        mtfEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myTextField2ActionPerformed(evt);
+                mtfEmailActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel2.add(myTextField2, gridBagConstraints);
+        jPanel2.add(mtfEmail, gridBagConstraints);
 
-        myPasswordField1.setMaximumSize(new java.awt.Dimension(200, 35));
-        myPasswordField1.setMinimumSize(new java.awt.Dimension(200, 35));
-        myPasswordField1.setPreferredSize(new java.awt.Dimension(250, 35));
+        mtfSenha.setImagem(new javax.swing.ImageIcon(getClass().getResource("/Imagens/SenhaFechada25px.png"))); // NOI18N
+        mtfSenha.setMaximumSize(new java.awt.Dimension(200, 35));
+        mtfSenha.setMinimumSize(new java.awt.Dimension(200, 35));
+        mtfSenha.setPreferredSize(new java.awt.Dimension(250, 35));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel2.add(myPasswordField1, gridBagConstraints);
+        jPanel2.add(mtfSenha, gridBagConstraints);
 
-        myPasswordField2.setMaximumSize(new java.awt.Dimension(200, 35));
-        myPasswordField2.setMinimumSize(new java.awt.Dimension(200, 35));
-        myPasswordField2.setPreferredSize(new java.awt.Dimension(250, 35));
+        mtfConfirSenha.setImagem(new javax.swing.ImageIcon(getClass().getResource("/Imagens/SenhaFechada25px.png"))); // NOI18N
+        mtfConfirSenha.setMaximumSize(new java.awt.Dimension(200, 35));
+        mtfConfirSenha.setMinimumSize(new java.awt.Dimension(200, 35));
+        mtfConfirSenha.setPreferredSize(new java.awt.Dimension(250, 35));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel2.add(myPasswordField2, gridBagConstraints);
+        jPanel2.add(mtfConfirSenha, gridBagConstraints);
 
-        myButton1.setText("Cadastrar");
+        mtbtCadastras.setText("Cadastrar");
+        mtbtCadastras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mtbtCadastrasActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel2.add(myButton1, gridBagConstraints);
+        jPanel2.add(mtbtCadastras, gridBagConstraints);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(8, 136, 183));
-        jLabel2.setText("Nome de Usuario");
+        JlNomeDeUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        JlNomeDeUsuario.setForeground(new java.awt.Color(8, 136, 183));
+        JlNomeDeUsuario.setText("Nome de Usuario");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel2.add(jLabel2, gridBagConstraints);
+        jPanel2.add(JlNomeDeUsuario, gridBagConstraints);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(8, 136, 183));
-        jLabel3.setText("Email");
+        jlEmail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jlEmail.setForeground(new java.awt.Color(8, 136, 183));
+        jlEmail.setText("Email");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel2.add(jLabel3, gridBagConstraints);
+        jPanel2.add(jlEmail, gridBagConstraints);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(8, 136, 183));
-        jLabel4.setText("Senha");
+        jlSenha.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jlSenha.setForeground(new java.awt.Color(8, 136, 183));
+        jlSenha.setText("Senha");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel2.add(jLabel4, gridBagConstraints);
+        jPanel2.add(jlSenha, gridBagConstraints);
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(8, 136, 183));
-        jLabel5.setText("Senha Novamente");
+        jlSenhaNovamente.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jlSenhaNovamente.setForeground(new java.awt.Color(8, 136, 183));
+        jlSenhaNovamente.setText("Senha Novamente");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel2.add(jLabel5, gridBagConstraints);
+        jPanel2.add(jlSenhaNovamente, gridBagConstraints);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setMaximumSize(new java.awt.Dimension(291, 40));
@@ -168,12 +181,12 @@ public class JpRegistrar extends javax.swing.JPanel {
         jPanel1.setPreferredSize(new java.awt.Dimension(291, 35));
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 20, 15));
 
-        jbLogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jbLogin.setForeground(new java.awt.Color(8, 136, 183));
-        jbLogin.setText("Login");
-        jbLogin.setBorderPainted(false);
-        jbLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jbLogin);
+        jbVoltarLogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jbVoltarLogin.setForeground(new java.awt.Color(8, 136, 183));
+        jbVoltarLogin.setText("Login");
+        jbVoltarLogin.setBorderPainted(false);
+        jbVoltarLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(jbVoltarLogin);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -192,24 +205,52 @@ public class JpRegistrar extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void myTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myTextField2ActionPerformed
+    private void mtfEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mtfEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_myTextField2ActionPerformed
+    }//GEN-LAST:event_mtfEmailActionPerformed
+
+    private void mtbtCadastrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mtbtCadastrasActionPerformed
+        voCadUsu = new VoCadastrandoUsuario(
+                mtfUsuario.getText(), 
+                mtfEmail.getText(), 
+                mtfSenha.getPassword(), 
+                mtfConfirSenha.getPassword()
+        );
+        
+        CadastrandoAlunoRN cadastroAluno = new CadastrandoAlunoRN(voCadUsu);
+        
+        if(cadastroAluno.isVerificandoNomeUsuario()){
+            JOptionPane.showMessageDialog(null, "O Usuario não pode estar vazio, deve ter no minimo 3 caracteres e menos que 20 caracter, deve ter apenas letras e espaços", "Nome Usuario", JOptionPane.INFORMATION_MESSAGE);
+        }else if(cadastroAluno.isVerificandoEmail()){
+            System.out.println(cadastroAluno.isVerificandoEmail());
+            JOptionPane.showMessageDialog(null, "Email incorreto", "Email", JOptionPane.INFORMATION_MESSAGE);
+        }else if(cadastroAluno.isVerificandoSenha()){
+            JOptionPane.showMessageDialog(null, "Senha deve ter no minimo 6 caracter", "Senha", JOptionPane.INFORMATION_MESSAGE);
+        }else if(cadastroAluno.isVerificandoConfirmSenha()){
+            JOptionPane.showMessageDialog(null, "As senhas devem ser igual", "Senha Errada", JOptionPane.WARNING_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "DADOS CADASTRADOS", "SUCESSO", JOptionPane.INFORMATION_MESSAGE);
+            mtfUsuario.setText("");
+            mtfEmail.setText("");
+            mtfSenha.setText("");
+            mtfConfirSenha.setText("");
+        }
+    }//GEN-LAST:event_mtbtCadastrasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel JlNomeDeUsuario;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JButton jbLogin;
+    private javax.swing.JButton jbVoltarLogin;
     private javax.swing.JLabel jlCadastrar;
-    private visao.Componentes.MyButton myButton1;
-    private visao.Componentes.MyPasswordField myPasswordField1;
-    private visao.Componentes.MyPasswordField myPasswordField2;
-    private visao.Componentes.MyTextField myTextField1;
-    private visao.Componentes.MyTextField myTextField2;
+    private javax.swing.JLabel jlEmail;
+    private javax.swing.JLabel jlSenha;
+    private javax.swing.JLabel jlSenhaNovamente;
+    private visao.Componentes.MyButton mtbtCadastras;
+    private visao.Componentes.MyPasswordField mtfConfirSenha;
+    private visao.Componentes.MyTextField mtfEmail;
+    private visao.Componentes.MyPasswordField mtfSenha;
+    private visao.Componentes.MyTextField mtfUsuario;
     // End of variables declaration//GEN-END:variables
 }
