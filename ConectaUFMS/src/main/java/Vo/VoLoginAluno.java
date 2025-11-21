@@ -4,16 +4,19 @@
  */
 package Vo;
 
+import org.bson.json.JsonObject;
+
 /**
  *
  * @author Usuario
  */
 public class VoLoginAluno {
-    
+
     private String email;
     private char[] senha;
-    
-    public VoLoginAluno(String email, char[] senha){
+    private String[] LoginBanco;
+
+    public VoLoginAluno(String email, char[] senha) {
         setEmail(email);
         setSenha(senha);
     }
@@ -33,4 +36,13 @@ public class VoLoginAluno {
     public void setSenha(char[] senha) {
         this.senha = senha;
     }
+
+    public String[] getLoginBanco() {
+        return LoginBanco;
+    }
+
+    public void setLoginBanco(String[] LoginBanco) {
+        this.LoginBanco = LoginBanco;
+    }
+
 }

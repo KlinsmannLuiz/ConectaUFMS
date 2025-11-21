@@ -5,7 +5,7 @@
 package regrasDeNegocio;
 
 import Vo.VoCadastrandoUsuario;
-import persistenciaMongoDB.CadastroAlunoPesistencia;
+import persistenciaMongoDB.CadastroAlunoPersistencia;
 
 /**
  *
@@ -17,7 +17,7 @@ public class CadastrandoAlunoRN {
     private boolean verificandoEmail = false;
     private boolean verificandoSenha = false;
     private boolean verificandoConfirmSenha = false;
-    private CadastroAlunoPesistencia cap;
+    private CadastroAlunoPersistencia cap;
     
     public boolean isVerificandoNomeUsuario() {
         return verificandoNomeUsuario;
@@ -95,7 +95,7 @@ public class CadastrandoAlunoRN {
     public void verificandoTodasCondicoes(VoCadastrandoUsuario cadastrandoAluno){
         
         if(!isVerificandoNomeUsuario() && !isVerificandoEmail() && !isVerificandoSenha() && !isVerificandoConfirmSenha()){
-           String retornoBanco = CadastroAlunoPesistencia.cadastroAluno(cadastrandoAluno);
+           String retornoBanco = CadastroAlunoPersistencia.cadastroAluno(cadastrandoAluno);
            cadastrandoAluno.setVerificandoCadastroNoBanco(  retornoBanco );
         }
     }

@@ -5,15 +5,49 @@
 package regrasDeNegocio;
 
 import Vo.VoLoginAluno;
+import persistenciaMongoDB.LoginAlunoPersistencia;
 
 /**
  *
  * @author Usuario
  */
 public class LoginAlunoRN {
-    
-    
-    public LoginAlunoRN(VoLoginAluno loginAluno){
-    
+
+    private boolean usuarioExistente, senhaUsuarioExiste;
+
+    public boolean isSenhaUsuarioExiste() {
+        return senhaUsuarioExiste;
     }
+
+    public void setSenhaUsuarioExiste(boolean senhaUsuarioExiste) {
+        this.senhaUsuarioExiste = senhaUsuarioExiste;
+    }
+
+    public boolean isUsuarioExistente() {
+        return usuarioExistente;
+    }
+
+    public void setUsuarioExistente(boolean usuarioExistente) {
+        this.usuarioExistente = usuarioExistente;
+    }
+
+    public LoginAlunoRN(VoLoginAluno loginAluno) {
+        LoginAlunoPersistencia.loginAluno(loginAluno);
+        String[] resultadoLogin = loginAluno.getLoginBanco();
+        
+        if("Usuario não existente".equals(resultadoLogin[0])){
+            setUsuarioExistente(false);
+        }else{
+            setUsuarioExistente(true);
+            
+            if(resultadoLogin[2].equals(new String(loginAluno.getSenha()))){
+                setSenhaUsuarioExiste(true);
+            }else{
+                System.out.println(resultadoLogin[2]);
+                System.out.println(loginAluno.getSenha());
+                setSenhaUsuarioExiste(false);
+            }
+        }
+    }
+
 }

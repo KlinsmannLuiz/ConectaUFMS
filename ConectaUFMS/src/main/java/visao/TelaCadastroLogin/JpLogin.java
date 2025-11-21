@@ -6,6 +6,7 @@ package visao.TelaCadastroLogin;
 
 import Vo.VoLoginAluno;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import regrasDeNegocio.LoginAlunoRN;
 
 /**
@@ -13,8 +14,9 @@ import regrasDeNegocio.LoginAlunoRN;
  * @author Usuario
  */
 public class JpLogin extends javax.swing.JPanel {
+
     private VoLoginAluno loginAluno;
-    
+
     /**
      * Creates new form jpLogin
      */
@@ -154,13 +156,26 @@ public class JpLogin extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBotaoAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBotaoAcessarActionPerformed
-        this.loginAluno = new VoLoginAluno(
+        loginAluno = new VoLoginAluno(
                 mtfEmailLogin.getText(),
                 mtfSenhaLogin.getPassword()
         );
+
+        LoginAlunoRN loginAlunoRN = new LoginAlunoRN(loginAluno);
         
-        LoginAlunoRN loginAlunoRN = new LoginAlunoRN(this.loginAluno);
-       
+        if (loginAlunoRN.isUsuarioExistente()) {
+            if (loginAlunoRN.isSenhaUsuarioExiste()) {
+                JOptionPane.showMessageDialog(null, "Login Efetuado", "Login", JOptionPane.INFORMATION_MESSAGE);
+                mtfEmailLogin.setText("");
+                mtfSenhaLogin.setText("");
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Senha Incorreta", "Login", JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuario Não Existente", "Login", JOptionPane.ERROR);
+        }
+
     }//GEN-LAST:event_jbBotaoAcessarActionPerformed
 
 

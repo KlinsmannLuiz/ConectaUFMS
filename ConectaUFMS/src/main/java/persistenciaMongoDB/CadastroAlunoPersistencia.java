@@ -14,7 +14,7 @@ import org.bson.Document;
  *
  * @author Usuario
  */
-public class CadastroAlunoPesistencia {
+public class CadastroAlunoPersistencia {
     
     public static String cadastroAluno(VoCadastrandoUsuario cadastrandoAluno) {
         try {
