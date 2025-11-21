@@ -218,6 +218,7 @@ public class JpRegistrar extends javax.swing.JPanel {
         );
         
         CadastrandoAlunoRN cadastroAluno = new CadastrandoAlunoRN(voCadUsu);
+        String resultadoBanco = voCadUsu.getVerificandoCadastroNoBanco();
         
         if(cadastroAluno.isVerificandoNomeUsuario()){
             JOptionPane.showMessageDialog(null, "O Usuario não pode estar vazio, deve ter no minimo 3 caracteres e menos que 20 caracter, deve ter apenas letras e espaços", "Nome Usuario", JOptionPane.INFORMATION_MESSAGE);
@@ -229,7 +230,15 @@ public class JpRegistrar extends javax.swing.JPanel {
         }else if(cadastroAluno.isVerificandoConfirmSenha()){
             JOptionPane.showMessageDialog(null, "As senhas devem ser igual", "Senha Errada", JOptionPane.WARNING_MESSAGE);
         }else{
-            JOptionPane.showMessageDialog(null, "DADOS CADASTRADOS", "SUCESSO", JOptionPane.INFORMATION_MESSAGE);
+            if("Email já cadastrado!".equals(resultadoBanco)){
+                JOptionPane.showMessageDialog(null, "Email já cadastrado!", "Email Erro", JOptionPane.WARNING_MESSAGE);
+                
+            }else if("Usuário cadastrado".equals(resultadoBanco)){
+                JOptionPane.showMessageDialog(null, "DADOS CADASTRADOS", "SUCESSO", JOptionPane.INFORMATION_MESSAGE);
+             
+            }else{
+                JOptionPane.showMessageDialog(null, resultadoBanco, "Erro Banco", JOptionPane.ERROR_MESSAGE);
+            }
             mtfUsuario.setText("");
             mtfEmail.setText("");
             mtfSenha.setText("");

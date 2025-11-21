@@ -43,7 +43,15 @@ public class VoCadastrandoUsuario {
     }
  
     
-    private String nome, email;
+    public String getVerificandoCadastroNoBanco() {
+        return VerificandoCadastroNoBanco;
+    }
+
+    public void setVerificandoCadastroNoBanco(String VerificandoCadastroNoBanco) {
+        this.VerificandoCadastroNoBanco = VerificandoCadastroNoBanco;
+    }
+    
+    private String nome, email, VerificandoCadastroNoBanco;
     private char[] senha,confirSenha;
     
     
