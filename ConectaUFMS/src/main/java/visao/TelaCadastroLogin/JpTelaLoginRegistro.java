@@ -23,6 +23,8 @@ public class JpTelaLoginRegistro extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 
         JpLogin login = new JpLogin();
+        login.setTelaPrincipal(this);
+        
         JpRegistrar registrar = new JpRegistrar();
         jpPainelSlide.setAnimate(5);
         

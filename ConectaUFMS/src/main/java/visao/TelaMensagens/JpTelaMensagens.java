@@ -17,6 +17,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
      */
     public JpTelaMensagens() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

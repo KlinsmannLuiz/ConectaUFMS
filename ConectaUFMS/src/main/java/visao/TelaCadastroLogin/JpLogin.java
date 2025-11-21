@@ -8,6 +8,7 @@ import Vo.VoLoginAluno;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import regrasDeNegocio.LoginAlunoRN;
+import visao.TelaMensagens.JpTelaMensagens;
 
 /**
  *
@@ -16,7 +17,16 @@ import regrasDeNegocio.LoginAlunoRN;
 public class JpLogin extends javax.swing.JPanel {
 
     private VoLoginAluno loginAluno;
+    private JpTelaMensagens telaMensagens;
+    private JpTelaLoginRegistro telaPrincipal;
 
+    public JpTelaLoginRegistro getTelaPrincipal() {
+        return telaPrincipal;
+    }
+
+    public void setTelaPrincipal(JpTelaLoginRegistro telaPrincipal) {
+        this.telaPrincipal = telaPrincipal;
+    }
     /**
      * Creates new form jpLogin
      */
@@ -168,6 +178,11 @@ public class JpLogin extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Login Efetuado", "Login", JOptionPane.INFORMATION_MESSAGE);
                 mtfEmailLogin.setText("");
                 mtfSenhaLogin.setText("");
+                
+                telaMensagens = new JpTelaMensagens();
+                telaMensagens.setVisible(true);
+                getTelaPrincipal().setVisible(false);
+                
                 
             } else {
                 JOptionPane.showMessageDialog(null, "Senha Incorreta", "Login", JOptionPane.WARNING_MESSAGE);
