@@ -83,7 +83,6 @@ public class PainelBalaoMensagens extends javax.swing.JPanel {
         if (arredondandoBordaBaixoDireta > 0) {
             area.intersect(new Area(criandoBordaBaixoDireita()));
         }
-        System.out.println(area.getBounds2D());
         g2d.fill(area);
 
     }

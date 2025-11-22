@@ -4,29 +4,22 @@
  */
 package Vo;
 
-import org.bson.json.JsonObject;
-
 /**
  *
  * @author Usuario
  */
 public class VoLoginAluno {
 
-    private String email;
+    private static String email;
     private char[] senha;
     private String[] LoginBanco;
-
-    public VoLoginAluno(String email, char[] senha) {
-        setEmail(email);
-        setSenha(senha);
-    }
 
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        VoLoginAluno.email = email;
     }
 
     public char[] getSenha() {

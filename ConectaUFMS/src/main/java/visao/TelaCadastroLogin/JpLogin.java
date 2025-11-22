@@ -147,6 +147,11 @@ public class JpLogin extends javax.swing.JPanel {
         jlCadastrar.setText("Cadastrar");
         jlCadastrar.setBorderPainted(false);
         jlCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jlCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jlCadastrarActionPerformed(evt);
+            }
+        });
         jpPainelBaixo.add(jlCadastrar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -166,10 +171,9 @@ public class JpLogin extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBotaoAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBotaoAcessarActionPerformed
-        loginAluno = new VoLoginAluno(
-                mtfEmailLogin.getText(),
-                mtfSenhaLogin.getPassword()
-        );
+        loginAluno = new VoLoginAluno();
+        loginAluno.setEmail(mtfEmailLogin.getText());
+        loginAluno.setSenha(mtfSenhaLogin.getPassword());
 
         LoginAlunoRN loginAlunoRN = new LoginAlunoRN(loginAluno);
         
@@ -192,6 +196,10 @@ public class JpLogin extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_jbBotaoAcessarActionPerformed
+
+    private void jlCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jlCadastrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jlCadastrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

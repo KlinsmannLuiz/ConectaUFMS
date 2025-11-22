@@ -21,6 +21,7 @@ public class JpTelaLoginRegistro extends javax.swing.JFrame {
     public JpTelaLoginRegistro() {
         initComponents();
         setLocationRelativeTo(null);
+        setTitle("Login / Registro");
 
         JpLogin login = new JpLogin();
         login.setTelaPrincipal(this);

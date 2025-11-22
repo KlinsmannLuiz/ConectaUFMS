@@ -31,6 +31,7 @@ public class JpRegistrar extends javax.swing.JPanel {
 
     public void addEventoVoltarLogin(ActionListener acv) {
         jbVoltarLogin.addActionListener(acv);
+        mtbtCadastrar.addActionListener(acv);
     }
 
     /**
@@ -49,7 +50,7 @@ public class JpRegistrar extends javax.swing.JPanel {
         mtfEmail = new visao.Componentes.MyTextField();
         mtfSenha = new visao.Componentes.MyPasswordField();
         mtfConfirSenha = new visao.Componentes.MyPasswordField();
-        mtbtCadastras = new visao.Componentes.MyButton();
+        mtbtCadastrar = new visao.Componentes.MyButton();
         JlNomeDeUsuario = new javax.swing.JLabel();
         jlEmail = new javax.swing.JLabel();
         jlSenha = new javax.swing.JLabel();
@@ -123,10 +124,10 @@ public class JpRegistrar extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel2.add(mtfConfirSenha, gridBagConstraints);
 
-        mtbtCadastras.setText("Cadastrar");
-        mtbtCadastras.addActionListener(new java.awt.event.ActionListener() {
+        mtbtCadastrar.setText("Cadastrar");
+        mtbtCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mtbtCadastrasActionPerformed(evt);
+                mtbtCadastrarActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -134,7 +135,7 @@ public class JpRegistrar extends javax.swing.JPanel {
         gridBagConstraints.gridy = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel2.add(mtbtCadastras, gridBagConstraints);
+        jPanel2.add(mtbtCadastrar, gridBagConstraints);
 
         JlNomeDeUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         JlNomeDeUsuario.setForeground(new java.awt.Color(8, 136, 183));
@@ -186,6 +187,11 @@ public class JpRegistrar extends javax.swing.JPanel {
         jbVoltarLogin.setText("Login");
         jbVoltarLogin.setBorderPainted(false);
         jbVoltarLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbVoltarLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbVoltarLoginActionPerformed(evt);
+            }
+        });
         jPanel1.add(jbVoltarLogin);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -209,7 +215,7 @@ public class JpRegistrar extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_mtfEmailActionPerformed
 
-    private void mtbtCadastrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mtbtCadastrasActionPerformed
+    private void mtbtCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mtbtCadastrarActionPerformed
         voCadUsu = new VoCadastrandoUsuario(
                 mtfUsuario.getText(), 
                 mtfEmail.getText(), 
@@ -235,7 +241,7 @@ public class JpRegistrar extends javax.swing.JPanel {
                 
             }else if("Usuário cadastrado".equals(resultadoBanco)){
                 JOptionPane.showMessageDialog(null, "DADOS CADASTRADOS", "SUCESSO", JOptionPane.INFORMATION_MESSAGE);
-             
+               
             }else{
                 JOptionPane.showMessageDialog(null, resultadoBanco, "Erro Banco", JOptionPane.ERROR_MESSAGE);
             }
@@ -244,7 +250,11 @@ public class JpRegistrar extends javax.swing.JPanel {
             mtfSenha.setText("");
             mtfConfirSenha.setText("");
         }
-    }//GEN-LAST:event_mtbtCadastrasActionPerformed
+    }//GEN-LAST:event_mtbtCadastrarActionPerformed
+
+    private void jbVoltarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVoltarLoginActionPerformed
+        
+    }//GEN-LAST:event_jbVoltarLoginActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -256,7 +266,7 @@ public class JpRegistrar extends javax.swing.JPanel {
     private javax.swing.JLabel jlEmail;
     private javax.swing.JLabel jlSenha;
     private javax.swing.JLabel jlSenhaNovamente;
-    private visao.Componentes.MyButton mtbtCadastras;
+    private visao.Componentes.MyButton mtbtCadastrar;
     private visao.Componentes.MyPasswordField mtfConfirSenha;
     private visao.Componentes.MyTextField mtfEmail;
     private visao.Componentes.MyPasswordField mtfSenha;
