@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -21,6 +22,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import regrasDeNegocio.ListaContatosRN;
+import visao.Componentes.MyButton;
+import visao.Componentes.MyTextField;
 
 /**
  *
@@ -246,11 +249,11 @@ public class JpTelaMensagens extends javax.swing.JFrame {
 
     private void iniciandoContatos() {
         VoContatos contatosVo = new VoContatos();
-        ListaContatosRN listaContatosRn = new ListaContatosRN();
-        
+        new ListaContatosRN();
+
         List<String[]> listaContatos = contatosVo.getListaDeContatos();
-        
-        for(int i = 0; i < listaContatos.size(); i++ ) {
+
+        for (int i = 0; i < listaContatos.size(); i++) {
             String item[] = listaContatos.get(i);
             aparecendoContatos(item[1]);
         }
@@ -275,9 +278,6 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         gbc.insets = new Insets(5, 5, 5, 10);
         gbc.anchor = GridBagConstraints.WEST;
 
-        //Configurando a Font
-        Font fonte = new Font("Arial", Font.PLAIN, 12);
-
         //Foto       
         int tamanhoDaFoto = 50;
         PainelBalaoMensagens foto = new PainelBalaoMensagens();
@@ -290,7 +290,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         foto.setArredondandoBordaCimaEsquerda(tamanhoDaFoto);
 
         JLabel letraFotoPerfil = new JLabel(String.valueOf(nome.charAt(0))); //Pegando primeira do nome e transformando para string
-        letraFotoPerfil.setFont(new Font("Arial", Font.BOLD, 10));
+        letraFotoPerfil.setFont(new Font("Arial", Font.BOLD, 14));
         letraFotoPerfil.setForeground(Color.white);
         letraFotoPerfil.setHorizontalAlignment(SwingConstants.CENTER);
         letraFotoPerfil.setVerticalAlignment(SwingConstants.CENTER);
@@ -331,12 +331,96 @@ public class JpTelaMensagens extends javax.swing.JFrame {
                 painelContato.setBackground(Color.WHITE);
                 super.mouseExited(e); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
             }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (JpPerfilContato.getComponentCount() > 0) {
+                    JpPerfilContato.removeAll(); // Limpa todos os componentes do painel
+                    JpPerfilContato.repaint(); //Redesenha o painel
+                    chamandoPerfilContato(nome, r2, g2, b2);
+                } else {
+                    chamandoPerfilContato(nome, r2, g2, b2);
+                }
+
+                chamandoEnviarMensagens();
+                super.mouseClicked(e); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+            }
+
         });
 
         //O jpContatosMensagem é o painel que vai ficar os contatos 
         JpContatosFrequentes.add(painelContato);
         JpContatosFrequentes.revalidate();
         JpContatosFrequentes.repaint();
+
+    }
+
+    private void chamandoPerfilContato(String nome, int r, int g, int b) {
+
+        JpPerfilContato.setLayout(new GridBagLayout());
+        JpPerfilContato.setBackground(Color.WHITE);
+        JpPerfilContato.setBorder(BorderFactory.createLineBorder(Color.gray, 1));
+
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.insets = new Insets(5, 10, 5, 1);
+        gbc.anchor = GridBagConstraints.WEST;
+        Font fonte = new Font("Arial", Font.BOLD, 14);
+
+        PainelBalaoMensagens foto = new PainelBalaoMensagens();
+        foto.setBackground(new Color(r, g, b));
+        foto.setPreferredSize(new Dimension(45, 45));
+        foto.setArredondandoBordaBaixoDireta(45);
+        foto.setArredondandoBordaBaixoEsquerda(45);
+        foto.setArredondandoBordaCimaDireta(45);
+        foto.setArredondandoBordaCimaEsquerda(45);
+
+        JLabel letraNome = new JLabel(String.valueOf(nome.charAt(0)));
+        letraNome.setForeground(Color.WHITE);
+        letraNome.setFont(new Font("Arial", Font.BOLD, 20));
+        foto.setLayout(new BorderLayout());
+        letraNome.setHorizontalAlignment(SwingConstants.CENTER);
+        letraNome.setVerticalAlignment(SwingConstants.CENTER);
+        foto.add(letraNome);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridheight = 2;
+
+        JpPerfilContato.add(foto, gbc);
+
+        gbc.gridheight = 1;
+        gbc.insets = new Insets(8, 5, 5, 1);
+        gbc.weightx = 1;
+
+        JLabel jlNome = new JLabel(nome);
+        jlNome.setFont(fonte);
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        JpPerfilContato.add(jlNome, gbc);
+
+        JLabel jlStatus = new JLabel("Offline");
+        gbc.insets = new Insets(1, 5, 5, 1);
+        jlStatus.setFont(fonte);
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        JpPerfilContato.add(jlStatus, gbc);
+
+        JpPerfilContato.revalidate();
+        JpPerfilContato.repaint();
+    }
+
+    private void chamandoEnviarMensagens() {
+
+        JpEnviarMensagens.setLayout(new BorderLayout());
+
+        MyTextField mtfdCampoEscreverMensagens = new MyTextField();
+        mtfdCampoEscreverMensagens.setText("");
+        JpEnviarMensagens.add(mtfdCampoEscreverMensagens, BorderLayout.CENTER);
+
+        MyButton mbEnviar = new MyButton();
+        mbEnviar.setText("Enviar");
+        JpEnviarMensagens.add(mbEnviar, BorderLayout.EAST);
 
     }
 
@@ -354,4 +438,5 @@ public class JpTelaMensagens extends javax.swing.JFrame {
     private visao.TelaMensagens.JpMenuLateralEsquerdo jpMenuLateralEsquerdo1;
     private visao.Componentes.MyTextField myTextField1;
     // End of variables declaration//GEN-END:variables
+
 }
