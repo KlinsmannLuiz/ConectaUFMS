@@ -343,11 +343,16 @@ public class JpTelaMensagens extends javax.swing.JFrame {
                     JpPerfilContato.removeAll(); // Limpa todos os componentes do painel
                     JpPerfilContato.repaint(); //Redesenha o painel
                     chamandoPerfilContato(nome, r2, g2, b2);
+                    
+                    JpConversaAtual.removeAll(); 
+                    JpConversaAtual.repaint();
+                    chamandoTelaDeMensagens();
                 } else {
                     chamandoPerfilContato(nome, r2, g2, b2);
+                    chamandoTelaDeMensagens();
+
                 }
 
-                chamandoTelaDeMensagens();
                 super.mouseClicked(e); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
             }
 
@@ -519,12 +524,8 @@ public class JpTelaMensagens extends javax.swing.JFrame {
     }
 
     private void simulandoResposta(String texto) {
-        Timer timer = new Timer(1000, e -> {
             String resposta = "Você disse: " + texto;
             adicionarMensagem(resposta, false); // false para quando for a outra pessoa.
-        });
-        timer.setRepeats(false);
-        timer.start();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
