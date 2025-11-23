@@ -9,7 +9,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -20,7 +19,11 @@ import java.util.Random;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
+import javax.swing.border.EmptyBorder;
 import regrasDeNegocio.ListaContatosRN;
 import visao.Componentes.MyButton;
 import visao.Componentes.MyTextField;
@@ -32,6 +35,8 @@ import visao.Componentes.MyTextField;
 public class JpTelaMensagens extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JpTelaMensagens.class.getName());
+
+    private JPanel espacador;
 
     public JpTelaMensagens() {
         initComponents();
@@ -58,6 +63,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         JpContatosFrequentes = new javax.swing.JPanel();
         JpConversa = new javax.swing.JPanel();
         JpPerfilContato = new javax.swing.JPanel();
+        JScrollMensagens = new javax.swing.JScrollPane();
         JpConversaAtual = new javax.swing.JPanel();
         JpEnviarMensagens = new javax.swing.JPanel();
 
@@ -178,9 +184,6 @@ public class JpTelaMensagens extends javax.swing.JFrame {
 
         JpConversa.add(JpPerfilContato);
 
-        JpConversaAtual.setBackground(new java.awt.Color(255, 255, 255));
-        JpConversaAtual.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(229, 231, 235)));
-
         javax.swing.GroupLayout JpConversaAtualLayout = new javax.swing.GroupLayout(JpConversaAtual);
         JpConversaAtual.setLayout(JpConversaAtualLayout);
         JpConversaAtualLayout.setHorizontalGroup(
@@ -192,7 +195,9 @@ public class JpTelaMensagens extends javax.swing.JFrame {
             .addGap(0, 488, Short.MAX_VALUE)
         );
 
-        JpConversa.add(JpConversaAtual);
+        JScrollMensagens.setViewportView(JpConversaAtual);
+
+        JpConversa.add(JScrollMensagens);
 
         JpEnviarMensagens.setBackground(new java.awt.Color(255, 255, 255));
         JpEnviarMensagens.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(229, 231, 235)));
@@ -342,7 +347,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
                     chamandoPerfilContato(nome, r2, g2, b2);
                 }
 
-                chamandoEnviarMensagens();
+                chamandoTelaDeMensagens();
                 super.mouseClicked(e); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
             }
 
@@ -410,22 +415,121 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         JpPerfilContato.repaint();
     }
 
-    private void chamandoEnviarMensagens() {
+    private void chamandoTelaDeMensagens() {
 
+        //Parte das Mensagens
+        JpConversaAtual.setLayout(new GridBagLayout());
+        JpConversaAtual.setBackground(new Color(230, 230, 230));
+
+        // Criando um espaçador para enpurrar as mensagens para cima
+        espacador = new JPanel();
+        espacador.setOpaque(false);
+        GridBagConstraints gbcEspacador = new GridBagConstraints();
+        gbcEspacador.gridwidth = GridBagConstraints.REMAINDER;
+        gbcEspacador.weighty = 1.0;
+        gbcEspacador.fill = GridBagConstraints.VERTICAL;
+        JpConversaAtual.add(espacador, gbcEspacador);
+
+        //Criando botões para escrever a mensagem e enviar a mensagem
+        // Painel
         JpEnviarMensagens.setLayout(new BorderLayout());
+        JpEnviarMensagens.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
+        // Campo
         MyTextField mtfdCampoEscreverMensagens = new MyTextField();
         mtfdCampoEscreverMensagens.setText("");
         JpEnviarMensagens.add(mtfdCampoEscreverMensagens, BorderLayout.CENTER);
 
+        //Botão
         MyButton mbEnviar = new MyButton();
         mbEnviar.setText("Enviar");
+        mbEnviar.addActionListener(e -> {
+            String texto = mtfdCampoEscreverMensagens.getText();
+            if (!texto.isEmpty()) {
+                adicionarMensagem(texto, true); // true para quando for o usuario
+                mtfdCampoEscreverMensagens.setText("");
+
+                simulandoResposta(texto); // Teste para um retorno de mensagem sem usar as threads 
+            }
+
+        });
         JpEnviarMensagens.add(mbEnviar, BorderLayout.EAST);
 
     }
 
+    private void adicionarMensagem(String texto, boolean usuario) {
+
+        // Remover o espacador temporariamente
+        JpConversaAtual.remove(espacador);
+
+        PainelBalaoMensagens bolhaMensagem = new PainelBalaoMensagens();
+        bolhaMensagem.setLayout(new BorderLayout());
+        bolhaMensagem.setBorder(new EmptyBorder(5, 10, 5, 10));
+
+        JLabel lbl = new JLabel("<html><p style='width:200px'>" + texto + "</p></html>");
+        lbl.setOpaque(false);
+        lbl.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        int tamanhoBordaMensagem = 20;
+        if (usuario) {
+            // Mensagem do usuário - direita (cor verde)
+            lbl.setForeground(Color.WHITE);
+            bolhaMensagem.setBackground(new Color(8, 136, 183));
+            bolhaMensagem.setArredondandoBordaBaixoDireta(tamanhoBordaMensagem);
+            bolhaMensagem.setArredondandoBordaBaixoEsquerda(tamanhoBordaMensagem);
+            bolhaMensagem.setArredondandoBordaCimaEsquerda(tamanhoBordaMensagem);
+            bolhaMensagem.add(lbl, BorderLayout.EAST);
+        } else {
+            // Mensagem recebida - esquerda (cor branca)
+            lbl.setForeground(Color.BLACK);
+            bolhaMensagem.setBackground(Color.WHITE);
+            bolhaMensagem.setArredondandoBordaBaixoDireta(tamanhoBordaMensagem);
+            bolhaMensagem.setArredondandoBordaBaixoEsquerda(tamanhoBordaMensagem);
+            bolhaMensagem.setArredondandoBordaCimaDireta(tamanhoBordaMensagem);
+            bolhaMensagem.add(lbl, BorderLayout.WEST);
+        }
+
+        // Configurar GridBagConstraints para controlar o posicionamento
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER; // Ocupa a linha inteira
+        gbc.fill = GridBagConstraints.NONE; // NÃO estica os componentes
+        gbc.anchor = usuario ? GridBagConstraints.EAST : GridBagConstraints.WEST; // Alinha direita/esquerda
+        gbc.insets = new Insets(2, 10, 2, 10); // Espaçamento entre mensagens
+        gbc.weightx = 1.0; // Ocupa toda a largura disponível horizontalmente
+        gbc.weighty = 0.0; // Não expande verticalmente
+
+        JpConversaAtual.add(bolhaMensagem, gbc);
+
+        // Re-adicionar o espacador no final (isso empurra tudo para cima)
+        GridBagConstraints gbcEspacador = new GridBagConstraints();
+        gbcEspacador.gridwidth = GridBagConstraints.REMAINDER;
+        gbcEspacador.weighty = 1.0; // Isso é o segredo - empurra as mensagens para cima
+        gbcEspacador.fill = GridBagConstraints.VERTICAL;
+        JpConversaAtual.add(espacador, gbcEspacador);
+
+        JpConversaAtual.revalidate();
+        JpConversaAtual.repaint();
+
+        // Scroll desce automaticamente
+        SwingUtilities.invokeLater(() -> {
+            JScrollBar barra = JScrollMensagens.getVerticalScrollBar();
+            barra.setValue(barra.getMaximum());
+        });
+
+    }
+
+    private void simulandoResposta(String texto) {
+        Timer timer = new Timer(1000, e -> {
+            String resposta = "Você disse: " + texto;
+            adicionarMensagem(resposta, false); // false para quando for a outra pessoa.
+        });
+        timer.setRepeats(false);
+        timer.start();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPainelContatos;
+    private javax.swing.JScrollPane JScrollMensagens;
     private javax.swing.JPanel JpBuscarContatos;
     private javax.swing.JPanel JpContatosFrequentes;
     private javax.swing.JPanel JpConversa;

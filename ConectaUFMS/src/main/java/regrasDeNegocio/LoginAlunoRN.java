@@ -43,8 +43,7 @@ public class LoginAlunoRN {
             if(resultadoLogin[2].equals(new String(loginAluno.getSenha()))){
                 setSenhaUsuarioExiste(true);
             }else{
-                System.out.println(resultadoLogin[2]);
-                System.out.println(loginAluno.getSenha());
+       
                 setSenhaUsuarioExiste(false);
             }
         }

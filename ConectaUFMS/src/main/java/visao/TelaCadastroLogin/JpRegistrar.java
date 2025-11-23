@@ -31,7 +31,7 @@ public class JpRegistrar extends javax.swing.JPanel {
 
     public void addEventoVoltarLogin(ActionListener acv) {
         jbVoltarLogin.addActionListener(acv);
-        mtbtCadastrar.addActionListener(acv);
+        
     }
 
     /**
@@ -241,14 +241,15 @@ public class JpRegistrar extends javax.swing.JPanel {
                 
             }else if("Usuário cadastrado".equals(resultadoBanco)){
                 JOptionPane.showMessageDialog(null, "DADOS CADASTRADOS", "SUCESSO", JOptionPane.INFORMATION_MESSAGE);
+                    mtfUsuario.setText("");
+                    mtfEmail.setText("");
+                    mtfSenha.setText("");
+                    mtfConfirSenha.setText("");
+                
                
             }else{
                 JOptionPane.showMessageDialog(null, resultadoBanco, "Erro Banco", JOptionPane.ERROR_MESSAGE);
             }
-            mtfUsuario.setText("");
-            mtfEmail.setText("");
-            mtfSenha.setText("");
-            mtfConfirSenha.setText("");
         }
     }//GEN-LAST:event_mtbtCadastrarActionPerformed
 
