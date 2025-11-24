@@ -15,17 +15,25 @@ import com.mongodb.client.MongoDatabase;
 public class ConectandoMongoDB {
 
     private static final String uri = "mongodb+srv://conectaufms:root@cluster0.n4pjldq.mongodb.net/?appName=Cluster0";
-    private static  MongoDatabase banco;
+    private static MongoDatabase banco;
     private static MongoClient client;
 
-    public static MongoDatabase conectar(){
+    static {
         try {
             client = MongoClients.create(uri);
             banco = client.getDatabase("ConectaUFMS");
-            return banco;
+            
         } catch (Exception e) {
-            return null;
+            banco = null;
         }
     }
     
+    public static MongoDatabase getBanco() {
+        return banco;
+    }
+
+    public static MongoClient getClient() {
+        return client;
+    }
+
 }

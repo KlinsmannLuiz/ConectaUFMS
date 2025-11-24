@@ -24,34 +24,36 @@ public class ContatosPersistencia {
     public static void buscandoContatos(VoLoginAluno loginAluno, VoContatos contatosVo) {
 
         try {
-            MongoDatabase banco = ConectandoMongoDB.conectar();
-            
-            MongoCollection<Document> colecao = banco.getCollection("ContatosSalvos");
+           
+            MongoCollection<Document> colecao = getColecao();
             Map<String, Object> filtro = new HashMap<>();
             filtro.put("emailDono", loginAluno.getEmail());
             Document filtroDoc = new Document(filtro);
 
             FindIterable<Document> contatos = colecao.find(filtroDoc);
-            
+
             List<String[]> arrayContatos = new ArrayList<>();
-            
-            for(Document doc : contatos){
-                
+
+            for (Document doc : contatos) {
+
                 String emailContato = doc.getString("emailContato");
                 String apelido = doc.getString("apelido");
-                
+
                 String[] valor = {emailContato, apelido};
-                
+
                 arrayContatos.add(valor);
-                
+
             }
             contatosVo.setListaDeContatos(arrayContatos);
-            
-            
+
         } catch (Exception e) {
             System.out.println("Erro no hora de buscar os dados");
         }
 
     }
 
+    private static MongoCollection<Document> getColecao() {
+        MongoDatabase banco = ConectandoMongoDB.getBanco();
+        return banco.getCollection("ContatosSalvos");
+    }
 }

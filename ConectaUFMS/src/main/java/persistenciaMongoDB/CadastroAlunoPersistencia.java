@@ -15,17 +15,11 @@ import org.bson.Document;
  * @author Usuario
  */
 public class CadastroAlunoPersistencia {
-    
+
     public static String cadastroAluno(VoCadastrandoUsuario cadastrandoAluno) {
         try {
 
-            MongoDatabase banco = ConectandoMongoDB.conectar();
-
-            if (banco == null) {
-                return "Erro de conexão com o banco";
-            }
-
-            MongoCollection<Document> colecao = banco.getCollection("Usuarios");
+            MongoCollection<Document> colecao = getColecao();
 
             Document usuario = new Document("nome", cadastrandoAluno.getNome())
                     .append("email", cadastrandoAluno.getEmail())
@@ -45,6 +39,10 @@ public class CadastroAlunoPersistencia {
             return "Erro geral no cadastro.";
         }
     }
-    
+
+    private static MongoCollection<Document> getColecao() {
+        MongoDatabase banco = ConectandoMongoDB.getBanco();
+        return banco.getCollection("Usuarios");
+    }
+
 }
-    

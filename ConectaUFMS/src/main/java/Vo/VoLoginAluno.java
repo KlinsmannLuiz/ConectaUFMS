@@ -10,9 +10,17 @@ package Vo;
  */
 public class VoLoginAluno {
 
-    private static String email;
+    private static String email, nome;
     private char[] senha;
     private String[] LoginBanco;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        VoLoginAluno.nome = nome;
+    }
 
     public String getEmail() {
         return email;

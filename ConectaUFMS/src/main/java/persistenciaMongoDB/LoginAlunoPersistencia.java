@@ -18,8 +18,7 @@ public class LoginAlunoPersistencia {
     public static void loginAluno(VoLoginAluno loginAluno) {
 
         try {
-            MongoDatabase banco = ConectandoMongoDB.conectar();
-            MongoCollection<Document> colecao = banco.getCollection("Usuarios");
+            MongoCollection<Document> colecao = getColecao();
 
             Document usuario = new Document("email", loginAluno.getEmail());
             Document resultado = colecao.find(usuario).first();
@@ -39,11 +38,18 @@ public class LoginAlunoPersistencia {
             }
 
             loginAluno.setLoginBanco(resultadoString);
-
+            loginAluno.setNome(resultadoString[0]);
+                    
         } catch (Exception e) {
             System.out.println("Erro fazer login no banco");
 
         }
 
     }
+
+    private static MongoCollection<Document> getColecao() {
+        MongoDatabase banco = ConectandoMongoDB.getBanco();
+        return banco.getCollection("Usuarios");
+    }
+
 }
