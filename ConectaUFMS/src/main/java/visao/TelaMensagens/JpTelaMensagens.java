@@ -24,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.border.EmptyBorder;
 import regrasDeNegocio.ListaContatosRN;
 import regrasDeNegocio.MensagemRN;
@@ -40,13 +41,14 @@ public class JpTelaMensagens extends javax.swing.JFrame {
 
     private JPanel espacador;
     private String emailDestinatarioAtual;
-    
+    private SwingWorker<Void, Object[]> monitoramento;
+
     public JpTelaMensagens() {
         initComponents();
         iniciandoContatos();
         setLocationRelativeTo(null);
         VoLoginAluno loginAluno = new VoLoginAluno();
-        jlNomeDoUsuario.setText( loginAluno.getNome() );
+        jlNomeDoUsuario.setText(loginAluno.getNome());
     }
 
     /**
@@ -353,8 +355,9 @@ public class JpTelaMensagens extends javax.swing.JFrame {
                 painelContato.setBackground(Color.WHITE);
                 super.mouseExited(e); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
             }
-            
-            VoLoginAluno loginUsuario = new VoLoginAluno();       
+
+            VoLoginAluno loginUsuario = new VoLoginAluno();
+
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (JpPerfilContato.getComponentCount() > 0) {
@@ -366,17 +369,25 @@ public class JpTelaMensagens extends javax.swing.JFrame {
                     JpConversaAtual.repaint();
                     chamandoTelaDeMensagens(emailDestinatario);
 
-                    
-                    buscandoMensagensAntigas(loginUsuario.getEmail(), emailDestinatario);
-                    
-                    
+//                    buscandoMensagensAntigas(loginUsuario.getEmail(), emailDestinatario);
+
                 } else {
                     chamandoPerfilContato(nome, r2, g2, b2);
                     chamandoTelaDeMensagens(emailDestinatario);
 
-                    buscandoMensagensAntigas(loginUsuario.getEmail(), emailDestinatario);
-                    
+//                    buscandoMensagensAntigas(loginUsuario.getEmail(), emailDestinatario);
+
                 }
+
+                //Verificando se o monitoramento existe, se existir cancela ele
+                if (monitoramento != null && !monitoramento.isCancelled()) {
+                    monitoramento.cancel(true);
+                }
+                // Iniciando o SwingWorker para monitorar mensagens novas
+                monitoramento = iniciarMonitoramentoDeMensagem(
+                        loginUsuario.getEmail(),
+                        emailDestinatario
+                );
 
                 super.mouseClicked(e); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
             }
@@ -480,7 +491,6 @@ public class JpTelaMensagens extends javax.swing.JFrame {
 
             if (!texto.isEmpty()) {
 
-                adicionarMensagem(texto, true); // true para quando for o usuario
                 mtfdCampoEscreverMensagens.setText("");
                 VoLoginAluno loginAluno = new VoLoginAluno();
 
@@ -577,12 +587,61 @@ public class JpTelaMensagens extends javax.swing.JFrame {
 
                 if (usuario) {
                     adicionarMensagem(texto, usuario);
-                    
+
                 } else {
                     adicionarMensagem(texto, usuario);
                 }
             }
         }
+
+    }
+
+    private SwingWorker iniciarMonitoramentoDeMensagem(
+            String emailDono,
+            String emailDestinatario
+    ) {
+        SwingWorker<Void, Object[]> worker = new SwingWorker<>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                MensagemRN mensagens = new MensagemRN();
+
+                long ultimasQuantidade = 0;
+
+                while (!isCancelled()) {
+                    Object[][] mensagensConversa = mensagens.buscandoMensagensAntigas(emailDono, emailDestinatario);
+
+                    long quantidadeAtual = mensagensConversa.length;
+
+                    if (quantidadeAtual > ultimasQuantidade) {
+                        for (int i = (int) ultimasQuantidade; i < quantidadeAtual; i++) {
+                            publish(mensagensConversa[i]);
+                        }
+                        ultimasQuantidade = quantidadeAtual;
+                    }
+
+                    Thread.sleep(500);
+                }
+                return null;
+            }
+
+            @Override
+            protected void process(List<Object[]> chunks) {
+                
+                for(int i = 0; i < chunks.size(); i++){
+                    String texto = String.valueOf(chunks.get(i)[0]);
+                    boolean usuario = (boolean) chunks.get(i)[1];
+                    adicionarMensagem(texto, usuario);
+                }
+                
+                super.process(chunks);
+            }
+            
+            
+            
+        };
+
+        worker.execute();
+        return worker;
 
     }
 
