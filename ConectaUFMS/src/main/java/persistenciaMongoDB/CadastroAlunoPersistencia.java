@@ -36,7 +36,7 @@ public class CadastroAlunoPersistencia {
             return "Usuário cadastrado";
 
         } catch (MongoWriteException e) {
-            if (e.getError() != null && e.getError().getCode() == 11000) {
+            if (e.getError() != null && e.getError().getCode() == 11000) { // 11000 = erro unique
                 return "Email já cadastrado!";
             }
             return "Erro ao gravar no banco (WriteException).";

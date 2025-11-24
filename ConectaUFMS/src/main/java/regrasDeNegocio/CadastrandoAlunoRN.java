@@ -17,7 +17,6 @@ public class CadastrandoAlunoRN {
     private boolean verificandoEmail = false;
     private boolean verificandoSenha = false;
     private boolean verificandoConfirmSenha = false;
-    private CadastroAlunoPersistencia cap;
     
     public boolean isVerificandoNomeUsuario() {
         return verificandoNomeUsuario;

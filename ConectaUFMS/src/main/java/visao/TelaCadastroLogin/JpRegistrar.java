@@ -229,7 +229,6 @@ public class JpRegistrar extends javax.swing.JPanel {
         if(cadastroAluno.isVerificandoNomeUsuario()){
             JOptionPane.showMessageDialog(null, "O Usuario não pode estar vazio, deve ter no minimo 3 caracteres e menos que 20 caracter, deve ter apenas letras e espaços", "Nome Usuario", JOptionPane.INFORMATION_MESSAGE);
         }else if(cadastroAluno.isVerificandoEmail()){
-            System.out.println(cadastroAluno.isVerificandoEmail());
             JOptionPane.showMessageDialog(null, "Email incorreto", "Email", JOptionPane.INFORMATION_MESSAGE);
         }else if(cadastroAluno.isVerificandoSenha()){
             JOptionPane.showMessageDialog(null, "Senha deve ter no minimo 6 caracter", "Senha", JOptionPane.INFORMATION_MESSAGE);

@@ -25,6 +25,7 @@ public class ContatosPersistencia {
 
         try {
             MongoDatabase banco = ConectandoMongoDB.conectar();
+            
             MongoCollection<Document> colecao = banco.getCollection("ContatosSalvos");
             Map<String, Object> filtro = new HashMap<>();
             filtro.put("emailDono", loginAluno.getEmail());

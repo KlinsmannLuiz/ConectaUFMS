@@ -5,6 +5,8 @@
 package visao.TelaMensagens;
 
 import Vo.VoContatos;
+import Vo.VoLoginAluno;
+import Vo.VoMensagem;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -14,17 +16,19 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.MouseEvent;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 import regrasDeNegocio.ListaContatosRN;
+import regrasDeNegocio.SalvandoMensagemRN;
 import visao.Componentes.MyButton;
 import visao.Componentes.MyTextField;
 
@@ -37,6 +41,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JpTelaMensagens.class.getName());
 
     private JPanel espacador;
+    private String emailDestinatarioAtual;
 
     public JpTelaMensagens() {
         initComponents();
@@ -260,11 +265,11 @@ public class JpTelaMensagens extends javax.swing.JFrame {
 
         for (int i = 0; i < listaContatos.size(); i++) {
             String item[] = listaContatos.get(i);
-            aparecendoContatos(item[1]);
+            aparecendoContatos(item[1], item[0]);
         }
     }
 
-    private void aparecendoContatos(String nome) {
+    private void aparecendoContatos(String nome, String emailDestinatario) {
 
         JPanel painelContato = new JPanel();
         painelContato.setLayout(new GridBagLayout());
@@ -343,14 +348,17 @@ public class JpTelaMensagens extends javax.swing.JFrame {
                     JpPerfilContato.removeAll(); // Limpa todos os componentes do painel
                     JpPerfilContato.repaint(); //Redesenha o painel
                     chamandoPerfilContato(nome, r2, g2, b2);
-                    
-                    JpConversaAtual.removeAll(); 
+
+                    chamandoTelaDeMensagens(emailDestinatario);
+
+                    JpConversaAtual.removeAll();
                     JpConversaAtual.repaint();
-                    chamandoTelaDeMensagens();
+                    //buscandoMensagensAntigas();
                 } else {
                     chamandoPerfilContato(nome, r2, g2, b2);
-                    chamandoTelaDeMensagens();
+                    chamandoTelaDeMensagens(emailDestinatario);
 
+                    //buscandoMensagensAntigas();
                 }
 
                 super.mouseClicked(e); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
@@ -420,7 +428,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         JpPerfilContato.repaint();
     }
 
-    private void chamandoTelaDeMensagens() {
+    private void chamandoTelaDeMensagens(String emailDestinatario) {
 
         //Parte das Mensagens
         JpConversaAtual.setLayout(new GridBagLayout());
@@ -444,17 +452,28 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         MyTextField mtfdCampoEscreverMensagens = new MyTextField();
         mtfdCampoEscreverMensagens.setText("");
         JpEnviarMensagens.add(mtfdCampoEscreverMensagens, BorderLayout.CENTER);
-
+        
+        System.out.println(emailDestinatario);
+        String emailDest = emailDestinatario;
         //Botão
         MyButton mbEnviar = new MyButton();
         mbEnviar.setText("Enviar");
+            this.emailDestinatarioAtual = emailDestinatario;
         mbEnviar.addActionListener(e -> {
             String texto = mtfdCampoEscreverMensagens.getText();
+            
+            System.out.println(emailDest);
             if (!texto.isEmpty()) {
+
                 adicionarMensagem(texto, true); // true para quando for o usuario
                 mtfdCampoEscreverMensagens.setText("");
+                VoLoginAluno loginAluno = new VoLoginAluno();
+                
+                //salvando no banco a mensagem
+                salvandoMensagens(this.emailDestinatarioAtual, loginAluno.getEmail(), texto);
 
                 simulandoResposta(texto); // Teste para um retorno de mensagem sem usar as threads 
+
             }
 
         });
@@ -524,10 +543,21 @@ public class JpTelaMensagens extends javax.swing.JFrame {
     }
 
     private void simulandoResposta(String texto) {
-            String resposta = "Você disse: " + texto;
-            adicionarMensagem(resposta, false); // false para quando for a outra pessoa.
+        String resposta = "Você disse: " + texto;
+        adicionarMensagem(resposta, false); // false para quando for a outra pessoa.
     }
 
+    private void salvandoMensagens(String emailDestinatario, String emailDono, String mensagemCampo) {
+        System.out.println("Email Login: " + emailDono);
+        System.out.println("Email pessoa da conversa: " + emailDestinatario);
+        VoMensagem mensagem = new VoMensagem();
+        mensagem.setEmailDono(emailDono);
+        mensagem.setEmailDestinatario(emailDestinatario);
+        mensagem.setMensagem(mensagemCampo);
+        
+        SalvandoMensagemRN salvandoMensagemRN = new SalvandoMensagemRN(mensagem);
+          
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPainelContatos;
     private javax.swing.JScrollPane JScrollMensagens;

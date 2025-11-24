@@ -8,9 +8,10 @@ import java.util.List;
 
 public class VoContatos {
     
-    private String nome, emailContato;
     private static List<String[]>listaDeContatos;    
 
+    // Lista com o emailDestinatario e com o apelido
+   
     public List<String[]> getListaDeContatos() {
         return listaDeContatos;
     }
@@ -18,23 +19,5 @@ public class VoContatos {
     public void setListaDeContatos(List<String[]> listaDeContatos) {
         VoContatos.listaDeContatos = listaDeContatos;
     }
-    
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEmailContato() {
-        return emailContato;
-    }
-
-    public void setEmailContato(String emailContato) {
-        this.emailContato = emailContato;
-    }
-    
-    
     
 }
