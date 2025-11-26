@@ -13,10 +13,18 @@ import persistenciaMongoDB.LoginAlunoPersistencia;
  */
 public class LoginAlunoRN {
 
-    private boolean usuarioExistente, senhaUsuarioExiste;
+    private boolean usuarioExistente, senhaUsuarioExiste, conectaBancoExiste;
 
     public boolean isSenhaUsuarioExiste() {
         return senhaUsuarioExiste;
+    }
+
+    public boolean isConectaBancoExiste() {
+        return conectaBancoExiste;
+    }
+
+    public void setConectaBancoExiste(boolean conectaBancoExiste) {
+        this.conectaBancoExiste = conectaBancoExiste;
     }
 
     public void setSenhaUsuarioExiste(boolean senhaUsuarioExiste) {
@@ -35,18 +43,25 @@ public class LoginAlunoRN {
         LoginAlunoPersistencia.loginAluno(loginAluno);
         String[] resultadoLogin = loginAluno.getLoginBanco();
         
-        if("Usuario não existente".equals(resultadoLogin[0])){
-            setUsuarioExistente(false);
-        }else{
-            setUsuarioExistente(true);
-            
-            if(resultadoLogin[2].equals(new String(loginAluno.getSenha()))){
-                setSenhaUsuarioExiste(true);
-            }else{
-       
-                setSenhaUsuarioExiste(false);
+        setConectaBancoExiste(false);
+        
+        if (resultadoLogin != null) {
+            if ("Usuario não existente".equals(resultadoLogin[0])) {
+                setUsuarioExistente(false);
+            } else {
+                setUsuarioExistente(true);
+
+                if (resultadoLogin[2].equals(new String(loginAluno.getSenha()))) {
+                    setSenhaUsuarioExiste(true);
+                } else {
+
+                    setSenhaUsuarioExiste(false);
+                }
             }
+        }else{
+            setConectaBancoExiste(true);
         }
+
     }
 
 }

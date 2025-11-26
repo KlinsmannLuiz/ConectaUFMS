@@ -125,7 +125,7 @@ public class MyButton extends JButton {
 
         // Ativa o antialiasing, suavizando as bordas de formas e textos para um visual mais bonito
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
+        
         // Define a cor atual como a cor da borda antes de desenhar o contorno do botão
         g2.setColor(borderColor);
 

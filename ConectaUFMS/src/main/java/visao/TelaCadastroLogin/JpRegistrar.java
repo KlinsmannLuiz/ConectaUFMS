@@ -6,6 +6,7 @@ package visao.TelaCadastroLogin;
 
 import Vo.VoCadastrandoUsuario;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import regrasDeNegocio.CadastrandoAlunoRN;
 
@@ -246,6 +247,10 @@ public class JpRegistrar extends javax.swing.JPanel {
                     mtfConfirSenha.setText("");
                 
                
+            }else if("Falha na Conexão (verifique a internet)".equals(resultadoBanco)){
+                ImageIcon imagem = new ImageIcon(getClass().getResource("/Imagens/wifiFraco30px.png"));
+                JOptionPane.showMessageDialog(null, "Falha na Conexão (verifique a internet)", "WiFi", JOptionPane.INFORMATION_MESSAGE, imagem);
+                
             }else{
                 JOptionPane.showMessageDialog(null, resultadoBanco, "Erro Banco", JOptionPane.ERROR_MESSAGE);
             }

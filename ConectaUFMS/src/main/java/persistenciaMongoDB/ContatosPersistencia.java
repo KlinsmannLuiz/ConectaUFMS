@@ -6,6 +6,7 @@ package persistenciaMongoDB;
 
 import Vo.VoContatos;
 import Vo.VoLoginAluno;
+import com.mongodb.MongoTimeoutException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;

@@ -6,7 +6,6 @@ package visao.TelaCadastroLogin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import visao.TelaCadastroLogin.JPainelSlide;
 /**
  *
  * @author Usuario
@@ -21,7 +20,7 @@ public class JpTelaLoginRegistro extends javax.swing.JFrame {
     public JpTelaLoginRegistro() {
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Login / Registro");
+        setTitle("Login");
 
         JpLogin login = new JpLogin();
         login.setTelaPrincipal(this);
@@ -34,6 +33,7 @@ public class JpTelaLoginRegistro extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jpPainelSlide.show(1);
+                setTitle("Cadastrar");
             } 
            
         });
@@ -42,6 +42,7 @@ public class JpTelaLoginRegistro extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jpPainelSlide.show(0);
+                setTitle("Login");
             }
             
         });

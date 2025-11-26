@@ -5,6 +5,7 @@
 package persistenciaMongoDB;
 
 import Vo.VoCadastrandoUsuario;
+import com.mongodb.MongoTimeoutException;
 import com.mongodb.MongoWriteException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -35,7 +36,10 @@ public class CadastroAlunoPersistencia {
             }
             return "Erro ao gravar no banco (WriteException).";
 
+        }catch(NullPointerException e){
+            return "Falha na Conexão (verifique a internet)";
         } catch (Exception e) {
+            System.out.println(e.getCause());
             return "Erro geral no cadastro.";
         }
     }

@@ -24,6 +24,7 @@ public class JPainelBorda extends javax.swing.JPanel {
         setOpaque(false);
     }
 
+    @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         Color corCima = new Color(0, 82, 122);

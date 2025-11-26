@@ -11,12 +11,13 @@ import java.awt.Shape;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
+import java.util.HashSet;
 
 /**
  *
  * @author Usuario
  */
-public class PainelBalaoMensagens extends javax.swing.JPanel {
+public class JPainelArredondado extends javax.swing.JPanel {
 
     public int getArredondandoBordaCimaDireta() {
         return arredondandoBordaCimaDireta;
@@ -53,18 +54,30 @@ public class PainelBalaoMensagens extends javax.swing.JPanel {
         this.arredondandoBordaBaixoEsquerda = arredondandoBoraBaixoEsquerda;
         repaint();
     }
+    public int getArredondandoBordas() {
+        return arredondandoBordas;
+    }
+
+    public void setArredondandoBordas(int arredondandoBordas) {
+        setArredondandoBordaBaixoDireta(arredondandoBordas);
+        setArredondandoBordaBaixoEsquerda(arredondandoBordas);
+        setArredondandoBordaCimaDireta(arredondandoBordas);
+        setArredondandoBordaCimaEsquerda(arredondandoBordas);
+        this.arredondandoBordas = arredondandoBordas;
+    }
 
     private int arredondandoBordaCimaDireta = 0;
     private int arredondandoBordaBaixoDireta = 0;
     private int arredondandoBordaCimaEsquerda = 0;
     private int arredondandoBordaBaixoEsquerda = 0;
+    private int arredondandoBordas = 0;
 
-    public PainelBalaoMensagens() {
+
+    public JPainelArredondado() {
         initComponents();
         setOpaque(false);
     }
 
-    
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -93,14 +106,14 @@ public class PainelBalaoMensagens extends javax.swing.JPanel {
         int largura = getWidth();
         int redondaX = Math.min(largura, arredondandoBordaCimaDireta);
         int redondaY = Math.min(altura, arredondandoBordaCimaDireta);
-        
+
         //Cria o painel com todos os cantos arredondados
         Area area = new Area(new RoundRectangle2D.Double(0, 0, largura, altura, redondaX, redondaY));
-        
+
         //preenche toda a aparte da esquerda para a direta até a antes da bora direita
         area.add(new Area(new Rectangle2D.Double(0, 0, largura - redondaX / 2, altura)));
         //parametros do metodo Rectangle2D = Rectangle2D.Double(x, y, largura, altura)
-        
+
         //preenche toda a parte de baixo para cima até a borda direita 
         area.add(new Area(new Rectangle2D.Double(0, redondaY / 2, largura, altura - redondaY / 2)));
 
@@ -110,14 +123,14 @@ public class PainelBalaoMensagens extends javax.swing.JPanel {
     public Shape criandoBordaCimaEsquerda() {
         int altura = getHeight();
         int largura = getWidth();
-        
+
         int redondaX = Math.min(largura, arredondandoBordaCimaEsquerda);
         int redondaY = Math.min(altura, arredondandoBordaCimaEsquerda);
-        
+
         Area area = new Area(new RoundRectangle2D.Double(0, 0, largura, altura, redondaX, redondaY));
-        
+
         area.add(new Area(new Rectangle2D.Double(redondaX / 2, 0, largura - redondaX / 2, altura)));
-       
+
         area.add(new Area(new Rectangle2D.Double(0, redondaY / 2, largura, altura - redondaY / 2)));
 
         return area;
@@ -126,15 +139,15 @@ public class PainelBalaoMensagens extends javax.swing.JPanel {
     public Shape criandoBordaBaixoDireita() {
         int altura = getHeight();
         int largura = getWidth();
-        
+
         int redondaX = Math.min(largura, arredondandoBordaBaixoDireta);
         int redondaY = Math.min(altura, arredondandoBordaBaixoDireta);
-        
+
         Area area = new Area(new RoundRectangle2D.Double(0, 0, largura, altura, redondaX, redondaY));
-       
+
         area.add(new Area(new Rectangle2D.Double(0, 0, largura - redondaX / 2, altura)));
-        
-         area.add(new Area(new Rectangle2D.Double(0, 0, largura, altura - redondaY / 2)));
+
+        area.add(new Area(new Rectangle2D.Double(0, 0, largura, altura - redondaY / 2)));
 
         return area;
     }
@@ -142,33 +155,24 @@ public class PainelBalaoMensagens extends javax.swing.JPanel {
     public Shape criandoBordaBaixoEsquerda() {
         int altura = getHeight();
         int largura = getWidth();
-        
+
         int redondaX = Math.min(largura, arredondandoBordaBaixoEsquerda);
         int redondaY = Math.min(altura, arredondandoBordaBaixoEsquerda);
-        
+
         Area area = new Area(new RoundRectangle2D.Double(0, 0, largura, altura, redondaX, redondaY));
-        
+
         area.add(new Area(new Rectangle2D.Double(redondaY / 2, 0, largura - redondaX / 2, altura)));
-        
+
         area.add(new Area(new Rectangle2D.Double(0, 0, largura, altura - redondaY / 2)));
 
         return area;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setLayout(new java.awt.GridBagLayout());
     }// </editor-fold>//GEN-END:initComponents
 
 

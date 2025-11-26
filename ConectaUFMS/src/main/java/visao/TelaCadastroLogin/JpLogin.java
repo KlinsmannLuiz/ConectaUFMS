@@ -1,36 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package visao.TelaCadastroLogin;
 
 import Vo.VoLoginAluno;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import regrasDeNegocio.LoginAlunoRN;
 import visao.TelaMensagens.JpTelaMensagens;
 
-/**
- *
- * @author Usuario
- */
 public class JpLogin extends javax.swing.JPanel {
 
     private VoLoginAluno loginAluno;
     private JpTelaMensagens telaMensagens;
-    private JpTelaLoginRegistro telaPrincipal;
-
+    private static JpTelaLoginRegistro telaPrincipal;
+    
     public JpTelaLoginRegistro getTelaPrincipal() {
         return telaPrincipal;
     }
 
     public void setTelaPrincipal(JpTelaLoginRegistro telaPrincipal) {
-        this.telaPrincipal = telaPrincipal;
+        JpLogin.telaPrincipal = telaPrincipal;
     }
 
-    /**
-     * Creates new form jpLogin
-     */
     public JpLogin() {
         initComponents();
         jlCadastrar.setFocusPainted(false);
@@ -43,6 +33,7 @@ public class JpLogin extends javax.swing.JPanel {
 
     public void addEventoIrCadastrar(ActionListener evt) {
         jlCadastrar.addActionListener(evt);
+
     }
 
     /**
@@ -179,29 +170,41 @@ public class JpLogin extends javax.swing.JPanel {
 
             LoginAlunoRN loginAlunoRN = new LoginAlunoRN(loginAluno);
 
-            if (loginAlunoRN.isUsuarioExistente()) {
-                if (loginAlunoRN.isSenhaUsuarioExiste()) {
-                    JOptionPane.showMessageDialog(null, "Login Efetuado", "Login", JOptionPane.INFORMATION_MESSAGE);
-                    mtfEmailLogin.setText("");
-                    mtfSenhaLogin.setText("");
+            if(!loginAlunoRN.isConectaBancoExiste()){
+                if (loginAlunoRN.isUsuarioExistente()) {
+                    if (loginAlunoRN.isSenhaUsuarioExiste()) {
+                        JOptionPane.showMessageDialog(null, "Login Efetuado", "Login", JOptionPane.INFORMATION_MESSAGE);
+                        mtfEmailLogin.setText("");
+                        mtfSenhaLogin.setText("");
 
-                    telaMensagens = new JpTelaMensagens();
-                    telaMensagens.setVisible(true);
-                    getTelaPrincipal().setVisible(false);
+                        telaMensagens = new JpTelaMensagens();
+                        telaMensagens.setVisible(true);
+                        getTelaPrincipal().setVisible(false);
 
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Senha Incorreta", "Login", JOptionPane.WARNING_MESSAGE);
+                
+                    }
+                
                 } else {
-                    JOptionPane.showMessageDialog(null, "Senha Incorreta", "Login", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Usuario Não Existente", "Login", JOptionPane.ERROR_MESSAGE);
+            
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Usuario Não Existente", "Login", JOptionPane.ERROR_MESSAGE);
+            
+            }else{
+                ImageIcon imagem = new ImageIcon(getClass().getResource("/Imagens/wifiFraco30px.png"));
+                JOptionPane.showMessageDialog(null, "Erro de Conexão", "Wifi", JOptionPane.INFORMATION_MESSAGE, imagem);
+                
             }
-
+            
+                
+            
         }
 
     }//GEN-LAST:event_jbBotaoAcessarActionPerformed
 
     private void jlCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jlCadastrarActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jlCadastrarActionPerformed
 
 

@@ -18,19 +18,23 @@ public class ConectandoMongoDB {
     private static MongoDatabase banco;
     private static MongoClient client;
 
-    static {
-        try {
+    
+    public static MongoDatabase getBanco(){
+        if (banco == null){
+            try {
             client = MongoClients.create(uri);
             banco = client.getDatabase("ConectaUFMS");
             
         } catch (Exception e) {
             banco = null;
         }
-    }
     
-    public static MongoDatabase getBanco() {
+        }
         return banco;
     }
+    
+        
+   
 
     public static MongoClient getClient() {
         return client;

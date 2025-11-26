@@ -16,9 +16,13 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.MouseEvent;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
@@ -30,6 +34,8 @@ import regrasDeNegocio.ListaContatosRN;
 import regrasDeNegocio.MensagemRN;
 import visao.Componentes.MyButton;
 import visao.Componentes.MyTextField;
+import visao.TelaCadastroLogin.JpLogin;
+import visao.TelaCadastroLogin.JpTelaLoginRegistro;
 
 /**
  *
@@ -40,13 +46,23 @@ public class JpTelaMensagens extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JpTelaMensagens.class.getName());
 
     private JPanel espacador;
+    private JpTelaLoginRegistro telaprincipal;
     private String emailDestinatarioAtual;
     private SwingWorker<Void, Object[]> monitoramento;
+    private JPainelAzul jpPainelAzul = new JPainelAzul();
 
     public JpTelaMensagens() {
         initComponents();
         iniciandoContatos();
+        iniciandoTelaBemVindo();
+        iniciandoComponentesMenuLateral();
         setLocationRelativeTo(null);
+        setTitle("TelaConversa");
+
+        JpPerfilContato.setVisible(false);
+        JScrollMensagens.setVisible(false);
+        JpEnviarMensagens.setVisible(false);
+
         VoLoginAluno loginAluno = new VoLoginAluno();
         jlNomeDoUsuario.setText(loginAluno.getNome());
     }
@@ -60,7 +76,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jpMenuLateralEsquerdo1 = new visao.TelaMensagens.JpMenuLateralEsquerdo();
+        jpMenuLateralEsquerdo = new visao.TelaMensagens.JpMenuLateralEsquerdo();
         JPainelContatos = new javax.swing.JPanel();
         JpLogoProjeto = new javax.swing.JPanel();
         jlConectaUFMS = new javax.swing.JLabel();
@@ -76,23 +92,28 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         JpEnviarMensagens = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowStateListener(new java.awt.event.WindowStateListener() {
+            public void windowStateChanged(java.awt.event.WindowEvent evt) {
+                formWindowStateChanged(evt);
+            }
+        });
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
-        jpMenuLateralEsquerdo1.setMaximumSize(new java.awt.Dimension(60, 32767));
-        jpMenuLateralEsquerdo1.setMinimumSize(new java.awt.Dimension(60, 600));
+        jpMenuLateralEsquerdo.setMaximumSize(new java.awt.Dimension(60, 32767));
+        jpMenuLateralEsquerdo.setMinimumSize(new java.awt.Dimension(60, 600));
 
-        javax.swing.GroupLayout jpMenuLateralEsquerdo1Layout = new javax.swing.GroupLayout(jpMenuLateralEsquerdo1);
-        jpMenuLateralEsquerdo1.setLayout(jpMenuLateralEsquerdo1Layout);
-        jpMenuLateralEsquerdo1Layout.setHorizontalGroup(
-            jpMenuLateralEsquerdo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jpMenuLateralEsquerdoLayout = new javax.swing.GroupLayout(jpMenuLateralEsquerdo);
+        jpMenuLateralEsquerdo.setLayout(jpMenuLateralEsquerdoLayout);
+        jpMenuLateralEsquerdoLayout.setHorizontalGroup(
+            jpMenuLateralEsquerdoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 60, Short.MAX_VALUE)
         );
-        jpMenuLateralEsquerdo1Layout.setVerticalGroup(
-            jpMenuLateralEsquerdo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jpMenuLateralEsquerdoLayout.setVerticalGroup(
+            jpMenuLateralEsquerdoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 600, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jpMenuLateralEsquerdo1);
+        getContentPane().add(jpMenuLateralEsquerdo);
 
         JPainelContatos.setMaximumSize(new java.awt.Dimension(260, 50000));
         JPainelContatos.setMinimumSize(new java.awt.Dimension(260, 600));
@@ -108,6 +129,12 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         jlConectaUFMS.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jlConectaUFMS.setForeground(new java.awt.Color(255, 255, 255));
         jlConectaUFMS.setText("ConectaUFMS");
+        jlConectaUFMS.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jlConectaUFMS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlConectaUFMSMouseClicked(evt);
+            }
+        });
 
         jlNomeDoUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jlNomeDoUsuario.setForeground(new java.awt.Color(255, 255, 255));
@@ -145,7 +172,6 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         JpBuscarContatos.setMinimumSize(new java.awt.Dimension(260, 50));
         JpBuscarContatos.setPreferredSize(new java.awt.Dimension(260, 50));
 
-        myTextField1.setText("myTextField1");
         myTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 myTextField1ActionPerformed(evt);
@@ -246,6 +272,14 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_myTextField1ActionPerformed
 
+    private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
+        JpEnviarMensagens.repaint();
+    }//GEN-LAST:event_formWindowStateChanged
+
+    private void jlConectaUFMSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlConectaUFMSMouseClicked
+
+    }//GEN-LAST:event_jlConectaUFMSMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -269,6 +303,47 @@ public class JpTelaMensagens extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new JpTelaMensagens().setVisible(true));
+    }
+
+    private void iniciandoComponentesMenuLateral() {
+        jpMenuLateralEsquerdo.setLayout(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        VoLoginAluno loginAluno = new VoLoginAluno();
+
+        JPainelArredondado perfil = new JPainelArredondado();
+        perfil.setPreferredSize(new Dimension(50, 50));
+        perfil.setBackground(new Color(60, 200, 230));
+        
+        perfil.setArredondandoBordas(50);
+
+        JLabel letra = new JLabel(String.valueOf(loginAluno.getNome().charAt(0)));
+        letra.setForeground(Color.WHITE);
+        letra.setFont(new Font("Arial", Font.BOLD, 20));
+        perfil.add(letra);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weighty = 1;
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.insets = new Insets(8, 5, 1, 5);
+        jpMenuLateralEsquerdo.add(perfil, gbc);
+
+        MyButton botaoSair = new MyButton();
+        botaoSair.setPreferredSize(new Dimension(50, 50));
+        botaoSair.setText("");
+        botaoSair.setRadius(50);
+        ImageIcon imagemSair = new ImageIcon(getClass().getResource("/Imagens/sair25px.png"));
+        botaoSair.setIcon((Icon)imagemSair);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weighty = 0;
+        gbc.insets = new Insets(1, 5, 10, 5);
+        jpMenuLateralEsquerdo.add(botaoSair, gbc);
+        
+        botaoSair.addActionListener(e -> saindoDoLogin());
+
     }
 
     private void iniciandoContatos() {
@@ -304,7 +379,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
 
         //Foto       
         int tamanhoDaFoto = 50;
-        PainelBalaoMensagens foto = new PainelBalaoMensagens();
+        JPainelArredondado foto = new JPainelArredondado();
         foto.setPreferredSize(new Dimension(tamanhoDaFoto, tamanhoDaFoto));
         foto.setBackground(new Color(r2, g2, b2));
         foto.setLayout(new BorderLayout());
@@ -361,22 +436,25 @@ public class JpTelaMensagens extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (JpPerfilContato.getComponentCount() > 0) {
+
                     JpPerfilContato.removeAll(); // Limpa todos os componentes do painel
                     JpPerfilContato.repaint(); //Redesenha o painel
                     chamandoPerfilContato(nome, r2, g2, b2);
 
                     JpConversaAtual.removeAll();
                     JpConversaAtual.repaint();
-                    chamandoTelaDeMensagens(emailDestinatario);
+                    JpEnviarMensagens.removeAll();
+                    JpEnviarMensagens.repaint();
 
-//                    buscandoMensagensAntigas(loginUsuario.getEmail(), emailDestinatario);
+                    chamandoTelaDeMensagens(emailDestinatario);
 
                 } else {
+                    jpPainelAzul.setVisible(false);
+                    JpPerfilContato.setVisible(true);
+                    JScrollMensagens.setVisible(true);
+                    JpEnviarMensagens.setVisible(true);
                     chamandoPerfilContato(nome, r2, g2, b2);
                     chamandoTelaDeMensagens(emailDestinatario);
-
-//                    buscandoMensagensAntigas(loginUsuario.getEmail(), emailDestinatario);
-
                 }
 
                 //Verificando se o monitoramento existe, se existir cancela ele
@@ -413,7 +491,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         gbc.anchor = GridBagConstraints.WEST;
         Font fonte = new Font("Arial", Font.BOLD, 14);
 
-        PainelBalaoMensagens foto = new PainelBalaoMensagens();
+        JPainelArredondado foto = new JPainelArredondado();
         foto.setBackground(new Color(r, g, b));
         foto.setPreferredSize(new Dimension(45, 45));
         foto.setArredondandoBordaBaixoDireta(45);
@@ -424,9 +502,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         JLabel letraNome = new JLabel(String.valueOf(nome.charAt(0)));
         letraNome.setForeground(Color.WHITE);
         letraNome.setFont(new Font("Arial", Font.BOLD, 20));
-        foto.setLayout(new BorderLayout());
-        letraNome.setHorizontalAlignment(SwingConstants.CENTER);
-        letraNome.setVerticalAlignment(SwingConstants.CENTER);
+        foto.setLayout(new GridBagLayout());
         foto.add(letraNome);
 
         gbc.gridx = 0;
@@ -452,6 +528,22 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         gbc.gridy = 1;
         JpPerfilContato.add(jlStatus, gbc);
 
+        MyButton jbBaixarHistorico = new MyButton();
+        jbBaixarHistorico.setPreferredSize(new Dimension(40, 40));
+        jbBaixarHistorico.setRadius(40);
+        gbc.insets = new Insets(5, 1, 5, 10);
+        jbBaixarHistorico.setText("");
+        ImageIcon imagemBaixar = new ImageIcon(getClass().getResource("/Imagens/baixarHistorico40px.png"));
+        jbBaixarHistorico.setIcon((Icon)imagemBaixar);
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.gridheight = 2;
+        gbc.weightx = 0;
+
+        JpPerfilContato.add(jbBaixarHistorico, gbc);
+        
+        jbBaixarHistorico.addActionListener(e -> baixarHistoricoMensagens());
+        
         JpPerfilContato.revalidate();
         JpPerfilContato.repaint();
     }
@@ -509,7 +601,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         // Remover o espacador temporariamente
         JpConversaAtual.remove(espacador);
 
-        PainelBalaoMensagens bolhaMensagem = new PainelBalaoMensagens();
+        JPainelArredondado bolhaMensagem = new JPainelArredondado();
         bolhaMensagem.setLayout(new BorderLayout());
         bolhaMensagem.setBorder(new EmptyBorder(5, 10, 5, 10));
 
@@ -609,7 +701,8 @@ public class JpTelaMensagens extends javax.swing.JFrame {
 
                 while (!isCancelled()) {
                     Object[][] mensagensConversa = mensagens.buscandoMensagensAntigas(emailDono, emailDestinatario);
-
+//                    System.out.println(emailDono);
+//                    System.out.println(emailDestinatario);
                     long quantidadeAtual = mensagensConversa.length;
 
                     if (quantidadeAtual > ultimasQuantidade) {
@@ -617,27 +710,28 @@ public class JpTelaMensagens extends javax.swing.JFrame {
                             publish(mensagensConversa[i]);
                         }
                         ultimasQuantidade = quantidadeAtual;
+//                        System.out.println("oi");
                     }
 
-                    Thread.sleep(500);
+                    Thread.sleep(1000);
                 }
                 return null;
             }
 
             @Override
             protected void process(List<Object[]> chunks) {
-                
-                for(int i = 0; i < chunks.size(); i++){
+
+                for (int i = 0; i < chunks.size(); i++) {
                     String texto = String.valueOf(chunks.get(i)[0]);
                     boolean usuario = (boolean) chunks.get(i)[1];
+//                    System.out.println(texto);
+//                    System.out.println(usuario);
                     adicionarMensagem(texto, usuario);
                 }
-                
+
                 super.process(chunks);
             }
-            
-            
-            
+
         };
 
         worker.execute();
@@ -645,6 +739,32 @@ public class JpTelaMensagens extends javax.swing.JFrame {
 
     }
 
+    private void iniciandoTelaBemVindo() {
+        JpPerfilContato.setVisible(false);
+        JScrollMensagens.setVisible(false);
+        JpEnviarMensagens.setVisible(false);
+
+        jpPainelAzul.setMaximumSize(new Dimension(50000, 50000));
+        jpPainelAzul.setMinimumSize(new Dimension(680, 600));
+        jpPainelAzul.setPreferredSize(new Dimension(680, 600));
+        JpConversa.add(jpPainelAzul);
+
+    }
+    
+    private void saindoDoLogin() {
+        VoLoginAluno loginAluno = new VoLoginAluno();
+        loginAluno.setEmail("");
+        loginAluno.setNome("");
+        dispose();
+        JpLogin telaLogin = new JpLogin();
+        telaLogin.getTelaPrincipal().setVisible(true);
+    }
+    
+    private void baixarHistoricoMensagens() {
+        System.out.println("Baixando Historico.....");
+    }
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPainelContatos;
     private javax.swing.JScrollPane JScrollMensagens;
@@ -658,8 +778,11 @@ public class JpTelaMensagens extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel jlConectaUFMS;
     private javax.swing.JLabel jlNomeDoUsuario;
-    private visao.TelaMensagens.JpMenuLateralEsquerdo jpMenuLateralEsquerdo1;
+    private visao.TelaMensagens.JpMenuLateralEsquerdo jpMenuLateralEsquerdo;
     private visao.Componentes.MyTextField myTextField1;
     // End of variables declaration//GEN-END:variables
+
+
+
 
 }
