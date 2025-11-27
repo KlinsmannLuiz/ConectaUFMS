@@ -36,7 +36,7 @@ import visao.Componentes.MyButton;
 import visao.Componentes.MyTextField;
 import visao.TelaCadastroLogin.JpLogin;
 import visao.TelaCadastroLogin.JpTelaLoginRegistro;
-
+import java.awt.Toolkit;
 /**
  *
  * @author Usuario
@@ -711,6 +711,9 @@ public class JpTelaMensagens extends javax.swing.JFrame {
                         }
                         ultimasQuantidade = quantidadeAtual;
 //                        System.out.println("oi");
+                        SwingUtilities.invokeLater(() -> {
+                            Toolkit.getDefaultToolkit().beep();
+                        });
                     }
 
                     Thread.sleep(1000);
