@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package visao.TelaMensagens;
-
+  
 import Vo.VoContatos;
 import Vo.VoLoginAluno;
 import Vo.VoMensagem;
@@ -386,10 +386,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         foto.setPreferredSize(new Dimension(tamanhoDaFoto, tamanhoDaFoto));
         foto.setBackground(new Color(r2, g2, b2));
         foto.setLayout(new BorderLayout());
-        foto.setArredondandoBordaBaixoDireta(tamanhoDaFoto);
-        foto.setArredondandoBordaBaixoEsquerda(tamanhoDaFoto);
-        foto.setArredondandoBordaCimaDireta(tamanhoDaFoto);
-        foto.setArredondandoBordaCimaEsquerda(tamanhoDaFoto);
+        foto.setArredondandoBordas(tamanhoDaFoto);
 
         JLabel letraFotoPerfil = new JLabel(String.valueOf(nome.charAt(0))); //Pegando primeira do nome e transformando para string
         letraFotoPerfil.setFont(new Font("Arial", Font.BOLD, 14));
@@ -610,6 +607,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
 
         JLabel lbl = new JLabel("<html><p style='width:200px'>" + texto + "</p></html>");
         lbl.setOpaque(false);
+        lbl.setFont(new Font("Arial", Font.PLAIN, 14));
         lbl.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         int tamanhoBordaMensagem = 20;
@@ -676,12 +674,13 @@ public class JpTelaMensagens extends javax.swing.JFrame {
             String emailDestinatario
     ) {
         SwingWorker<Void, Object[]> worker = new SwingWorker<>() {
+            
+
             @Override
             protected Void doInBackground() throws Exception {
                 MensagemRN mensagens = new MensagemRN();
-
                 long ultimasQuantidade = 0;
-
+                
                 while (!isCancelled()) {
                     Object[][] mensagensConversa = mensagens.buscandoMensagens(emailDono, emailDestinatario);
                     long quantidadeAtual = mensagensConversa.length;
@@ -712,6 +711,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
                 for (int i = 0; i < chunks.size(); i++) {
                     String texto = String.valueOf(chunks.get(i)[0]);
                     boolean usuario = Boolean.TRUE.equals(chunks.get(i)[1]);
+
                     adicionarMensagem(texto, usuario);
 
                 }
@@ -763,7 +763,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
             if (!pastaGeral.exists()) {
                 pastaGeral.mkdir();
             }
-            
+
             File pastaUsuario = new File(pastaGeral, "Historico Conversas - " + emailDono);
             if (!pastaUsuario.exists()) {
                 pastaUsuario.mkdir();
@@ -779,11 +779,11 @@ public class JpTelaMensagens extends javax.swing.JFrame {
                 boolean usuario = Boolean.TRUE.equals(historicoMensagens[i][1]);
                 if (usuario) {
                     bw.write("Eu: " + mensagem);
-                    bw.newLine(); 
+                    bw.newLine();
 
                 } else {
                     bw.write(emailDestinatario + ": " + mensagem);
-                    bw.newLine(); 
+                    bw.newLine();
 
                 }
             }

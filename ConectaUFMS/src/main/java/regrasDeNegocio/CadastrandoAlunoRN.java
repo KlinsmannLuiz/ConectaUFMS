@@ -23,7 +23,8 @@ public class CadastrandoAlunoRN {
     }
 
     public void setVerificandoNomeUsuario(boolean verificandoNomeUsuario) {
-        //Retorna um true caso as condições forem satisfeitas, ser um false para que na logica ele mostre o painel de verificação certo.
+        //Retorna um true caso as condições forem satisfeitas, ser um false para que na logica ele mostre o painel de 
+        // verificação certo.
         this.verificandoNomeUsuario = !verificandoNomeUsuario;
     }
 
@@ -67,7 +68,8 @@ public class CadastrandoAlunoRN {
                 && (nome.length() <= 20)
                 && (nome.matches("[A-Za-zÁÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕÇáéíóúàèìòùâêîôûãõç ]+"))
         );
-        // nome.matches("[A-Za-zÁÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕÇáéíóúàèìòùâêîôûãõç ]+") esta verificando se o nome tem esses tipos de caracteres, o '+', significa que pode ter mais de um desses caracteres.
+        // nome.matches("[A-Za-zÁÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕÇáéíóúàèìòùâêîôûãõç ]+") esta verificando se o nome tem esses tipos de 
+        //caracteres, o '+', significa que pode ter mais de um desses caracteres.
 
         //Verificando Email
         String email = cadastrandoAluno.getEmail().trim();
@@ -76,7 +78,9 @@ public class CadastrandoAlunoRN {
                 && (email.matches("^[A-Za-z0-9._%+-]+@ufms.br$"))
         );
         // ^ -> asignifica que a verificação deve começar do primeiro caracter
-        // [A-Za-z0-9._%+-]+ -> aceita qual quer um desses caracteres e o '+' no final significa que pode mais de um caracter
+        // [A-Za-z0-9._%+-]+ -> aceita qual quer um desses caracteres e o '+' no final significa que pode mais de um 
+        // caracter
+        
         // @[A-Za-z0-9.-]+ -> obrigatoriamente tem que ter o '@'
         // '\\.' o primeiro barra é para permiter o segundo barra para permitir o ponto;
         // [A-Za-z]{2,} -> significa que pode ter no minimo 2 caracteres.

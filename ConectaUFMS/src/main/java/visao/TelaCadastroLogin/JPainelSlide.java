@@ -25,7 +25,8 @@ public class JPainelSlide extends javax.swing.JPanel {
     public int getAnimate() {
         return animate;
     }
-
+    
+    //tempo da animação
     public void setAnimate(int animate) {
         this.animate = animate;
     }
@@ -35,6 +36,7 @@ public class JPainelSlide extends javax.swing.JPanel {
      */
     public JPainelSlide() {
         initComponents();
+        // o tempo esta definido como 0, então vai chamar animate o mais rapido possivel varias vezes
         timer = new Timer(0, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -49,12 +51,13 @@ public class JPainelSlide extends javax.swing.JPanel {
     private List<Component> list = new ArrayList<>();
     private int currentShowing;
     private boolean animateRight;
-
+    
+    // pode receber 1 ou mais componentes
     public void init(Component... com) {
         if (com.length > 0) {
             for (Component c : com) {
                 list.add(c);
-                c.setSize(getSize());
+                c.setSize(getSize()); //colocando o componente login e registrar do tamanho do painel slide
                 c.setVisible(false);
                 this.add(c);
             }
@@ -65,6 +68,7 @@ public class JPainelSlide extends javax.swing.JPanel {
     }
 
     public void show(int index) {
+        
         if (!timer.isRunning()) {
             if (list.size() >= 2 && index < list.size() && index != currentShowing) {
                 com2 = list.get(index);
