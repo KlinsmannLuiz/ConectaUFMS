@@ -35,6 +35,11 @@ import visao.Componentes.MyTextField;
 import visao.TelaCadastroLogin.JpLogin;
 import visao.TelaCadastroLogin.JpTelaLoginRegistro;
 import java.awt.Toolkit;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  *
  * @author Usuario
@@ -313,7 +318,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         JPainelArredondado perfil = new JPainelArredondado();
         perfil.setPreferredSize(new Dimension(50, 50));
         perfil.setBackground(new Color(60, 200, 230));
-        
+
         perfil.setArredondandoBordas(50);
 
         JLabel letra = new JLabel(String.valueOf(loginAluno.getNome().charAt(0)));
@@ -333,13 +338,13 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         botaoSair.setText("");
         botaoSair.setRadius(50);
         ImageIcon imagemSair = new ImageIcon(getClass().getResource("/Imagens/sair25px.png"));
-        botaoSair.setIcon((Icon)imagemSair);
+        botaoSair.setIcon((Icon) imagemSair);
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weighty = 0;
         gbc.insets = new Insets(1, 5, 10, 5);
         jpMenuLateralEsquerdo.add(botaoSair, gbc);
-        
+
         botaoSair.addActionListener(e -> saindoDoLogin());
 
     }
@@ -532,16 +537,16 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         gbc.insets = new Insets(5, 1, 5, 10);
         jbBaixarHistorico.setText("");
         ImageIcon imagemBaixar = new ImageIcon(getClass().getResource("/Imagens/baixarHistorico40px.png"));
-        jbBaixarHistorico.setIcon((Icon)imagemBaixar);
+        jbBaixarHistorico.setIcon((Icon) imagemBaixar);
         gbc.gridx = 2;
         gbc.gridy = 0;
         gbc.gridheight = 2;
         gbc.weightx = 0;
 
         JpPerfilContato.add(jbBaixarHistorico, gbc);
-        
+
         jbBaixarHistorico.addActionListener(e -> baixarHistoricoMensagens());
-        
+
         JpPerfilContato.revalidate();
         JpPerfilContato.repaint();
     }
@@ -666,8 +671,6 @@ public class JpTelaMensagens extends javax.swing.JFrame {
 
     }
 
-
-
     private SwingWorker iniciarMonitoramentoDeMensagem(
             String emailDono,
             String emailDestinatario
@@ -688,13 +691,17 @@ public class JpTelaMensagens extends javax.swing.JFrame {
 
                             publish(mensagensConversa[i]);
                         }
+
+                        if (ultimasQuantidade != 0) {
+                            SwingUtilities.invokeLater(() -> {
+                                Toolkit.getDefaultToolkit().beep();
+                            });
+                        }
+
                         ultimasQuantidade = quantidadeAtual;
-                        SwingUtilities.invokeLater(() -> {
-                            Toolkit.getDefaultToolkit().beep();
-                        });
                     }
 
-                    Thread.sleep(5000);
+                    Thread.sleep(1000);
                 }
                 return null;
             }
@@ -706,7 +713,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
                     String texto = String.valueOf(chunks.get(i)[0]);
                     boolean usuario = Boolean.TRUE.equals(chunks.get(i)[1]);
                     adicionarMensagem(texto, usuario);
-;
+
                 }
 
                 super.process(chunks);
@@ -730,7 +737,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         JpConversa.add(jpPainelAzul);
 
     }
-    
+
     private void saindoDoLogin() {
         VoLoginAluno loginAluno = new VoLoginAluno();
         loginAluno.setEmail("");
@@ -739,12 +746,58 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         JpLogin telaLogin = new JpLogin();
         telaLogin.getTelaPrincipal().setVisible(true);
     }
-    
+
     private void baixarHistoricoMensagens() {
-        System.out.println("Baixando Historico.....");
+        VoLoginAluno loginUsuario = new VoLoginAluno();
+
+        String emailDono = loginUsuario.getEmail();
+        String emailDestinatario = emailDestinatarioAtual;
+
+        MensagemRN mensagens = new MensagemRN();
+        Object[][] historicoMensagens = mensagens.buscandoMensagens(emailDono, emailDestinatario);
+
+        try {
+            String desktopPath = System.getProperty("user.home") + "\\Desktop";
+            File pastaGeral = new File(desktopPath, "Historico Conversas - ConectaUFMS");
+
+            if (!pastaGeral.exists()) {
+                pastaGeral.mkdir();
+            }
+            
+            File pastaUsuario = new File(pastaGeral, "Historico Conversas - " + emailDono);
+            if (!pastaUsuario.exists()) {
+                pastaUsuario.mkdir();
+            }
+
+            String nomeArquivo = "Conversa" + "_" + emailDestinatario + ".txt";
+            File arquivoChat = new File(pastaUsuario, nomeArquivo);
+
+            BufferedWriter bw = new BufferedWriter(new FileWriter(arquivoChat));
+
+            for (int i = 0; i < historicoMensagens.length; i++) {
+                String mensagem = historicoMensagens[i][0].toString();
+                boolean usuario = Boolean.TRUE.equals(historicoMensagens[i][1]);
+                if (usuario) {
+                    bw.write("Eu: " + mensagem);
+                    bw.newLine(); 
+
+                } else {
+                    bw.write(emailDestinatario + ": " + mensagem);
+                    bw.newLine(); 
+
+                }
+            }
+
+            bw.close();
+            System.out.println("Mensagens salvas em: " + arquivoChat.getAbsolutePath());
+
+        } catch (IOException ex) {
+            System.out.println("Erro ao salvar mensagens: " + ex.getMessage());
+        }
+
     }
 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPainelContatos;
     private javax.swing.JScrollPane JScrollMensagens;
@@ -761,8 +814,5 @@ public class JpTelaMensagens extends javax.swing.JFrame {
     private visao.TelaMensagens.JpMenuLateralEsquerdo jpMenuLateralEsquerdo;
     private visao.Componentes.MyTextField myTextField1;
     // End of variables declaration//GEN-END:variables
-
-
-
 
 }
