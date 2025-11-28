@@ -51,7 +51,7 @@ public class MensagemPersistencia {
 
             //filtrando e ordenando por hora
             FindIterable<Document> mensagens = colecao.find(or(filtroDono, filtroDestinatario))
-                    .sort(new Document("hora", 1)); // 1 = crescente (mais antiga → mais nova)
+                    .sort(new Document("_id", 1)); // 1 = crescente (mais antiga → mais nova)
 
             List<Object[]> lista = new ArrayList<>();
 
@@ -65,8 +65,8 @@ public class MensagemPersistencia {
 
             }
             //converter a lista para Array
-            return lista.toArray(new Object[0][]);
-
+            return lista.toArray(Object[][]::new);
+            
         } catch (Exception e) {
             return new Object[][]{{"Erro de banco", null}};
         }

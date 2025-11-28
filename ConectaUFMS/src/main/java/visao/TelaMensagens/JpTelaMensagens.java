@@ -16,10 +16,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.MouseEvent;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -668,25 +666,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
 
     }
 
-    private void buscandoMensagensAntigas(String emailDono, String emailDestinatario) {
-        MensagemRN mensagemRN = new MensagemRN();
-        Object[][] mensagemAntigas = mensagemRN.buscandoMensagensAntigas(emailDono, emailDestinatario);
 
-        if (mensagemAntigas != null) {
-            for (int i = 0; i < mensagemAntigas.length; i++) {
-                String texto = String.valueOf(mensagemAntigas[i][0]);
-                boolean usuario = (boolean) mensagemAntigas[i][1];
-
-                if (usuario) {
-                    adicionarMensagem(texto, usuario);
-
-                } else {
-                    adicionarMensagem(texto, usuario);
-                }
-            }
-        }
-
-    }
 
     private SwingWorker iniciarMonitoramentoDeMensagem(
             String emailDono,
@@ -700,23 +680,21 @@ public class JpTelaMensagens extends javax.swing.JFrame {
                 long ultimasQuantidade = 0;
 
                 while (!isCancelled()) {
-                    Object[][] mensagensConversa = mensagens.buscandoMensagensAntigas(emailDono, emailDestinatario);
-//                    System.out.println(emailDono);
-//                    System.out.println(emailDestinatario);
+                    Object[][] mensagensConversa = mensagens.buscandoMensagens(emailDono, emailDestinatario);
                     long quantidadeAtual = mensagensConversa.length;
 
                     if (quantidadeAtual > ultimasQuantidade) {
                         for (int i = (int) ultimasQuantidade; i < quantidadeAtual; i++) {
+
                             publish(mensagensConversa[i]);
                         }
                         ultimasQuantidade = quantidadeAtual;
-//                        System.out.println("oi");
                         SwingUtilities.invokeLater(() -> {
                             Toolkit.getDefaultToolkit().beep();
                         });
                     }
 
-                    Thread.sleep(1000);
+                    Thread.sleep(5000);
                 }
                 return null;
             }
@@ -726,10 +704,9 @@ public class JpTelaMensagens extends javax.swing.JFrame {
 
                 for (int i = 0; i < chunks.size(); i++) {
                     String texto = String.valueOf(chunks.get(i)[0]);
-                    boolean usuario = (boolean) chunks.get(i)[1];
-//                    System.out.println(texto);
-//                    System.out.println(usuario);
+                    boolean usuario = Boolean.TRUE.equals(chunks.get(i)[1]);
                     adicionarMensagem(texto, usuario);
+;
                 }
 
                 super.process(chunks);

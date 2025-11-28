@@ -18,10 +18,10 @@ public class MensagemRN {
         String resultado = MensagemPersistencia.salvar(mensagem);
     }
     
-    public Object[][] buscandoMensagensAntigas(String emailDono, String emailDestinatario){
+    public Object[][] buscandoMensagens(String emailDono, String emailDestinatario){
         
         Object[][] mensagensConversa = MensagemPersistencia.buscar(emailDono, emailDestinatario);
-        
+
         return mensagensConversa;
         
     }
