@@ -10,9 +10,17 @@ package Vo;
  */
 public class VoLoginAluno {
 
-    private static String email, nome;
+    private static String email, nome, status = "offline";
     private char[] senha;
     private String[] LoginBanco;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        VoLoginAluno.status = status;
+    }
 
     public String getNome() {
         return nome;

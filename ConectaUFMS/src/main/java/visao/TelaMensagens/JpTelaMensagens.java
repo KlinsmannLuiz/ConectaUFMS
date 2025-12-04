@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package visao.TelaMensagens;
-  
+
 import Vo.VoContatos;
 import Vo.VoLoginAluno;
 import Vo.VoMensagem;
@@ -39,6 +39,12 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import javax.swing.JOptionPane;
+import regrasDeNegocio.LoginAlunoRN;
 
 /**
  *
@@ -49,6 +55,8 @@ public class JpTelaMensagens extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JpTelaMensagens.class.getName());
 
     private JPanel espacador;
+    VoLoginAluno loginAlunoVo = new VoLoginAluno();
+    LoginAlunoRN loginAlunoRN = new LoginAlunoRN();
     private JpTelaLoginRegistro telaprincipal;
     private String emailDestinatarioAtual;
     private SwingWorker<Void, Object[]> monitoramento;
@@ -59,6 +67,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         iniciandoContatos();
         iniciandoTelaBemVindo();
         iniciandoComponentesMenuLateral();
+
         setLocationRelativeTo(null);
         setTitle("TelaConversa");
 
@@ -66,8 +75,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         JScrollMensagens.setVisible(false);
         JpEnviarMensagens.setVisible(false);
 
-        VoLoginAluno loginAluno = new VoLoginAluno();
-        jlNomeDoUsuario.setText(loginAluno.getNome());
+        jlNomeDoUsuario.setText(loginAlunoVo.getNome());
     }
 
     /**
@@ -98,6 +106,11 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         addWindowStateListener(new java.awt.event.WindowStateListener() {
             public void windowStateChanged(java.awt.event.WindowEvent evt) {
                 formWindowStateChanged(evt);
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
@@ -283,6 +296,11 @@ public class JpTelaMensagens extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jlConectaUFMSMouseClicked
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        loginAlunoVo.setStatus("offline");
+        loginAlunoRN.mudarStatus(loginAlunoVo);
+    }//GEN-LAST:event_formWindowClosing
+
     /**
      * @param args the command line arguments
      */
@@ -292,16 +310,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
+        
         //</editor-fold>
 
         /* Create and display the form */
@@ -313,15 +322,13 @@ public class JpTelaMensagens extends javax.swing.JFrame {
 
         GridBagConstraints gbc = new GridBagConstraints();
 
-        VoLoginAluno loginAluno = new VoLoginAluno();
-
         JPainelArredondado perfil = new JPainelArredondado();
         perfil.setPreferredSize(new Dimension(50, 50));
         perfil.setBackground(new Color(60, 200, 230));
 
         perfil.setArredondandoBordas(50);
 
-        JLabel letra = new JLabel(String.valueOf(loginAluno.getNome().charAt(0)));
+        JLabel letra = new JLabel(String.valueOf(loginAlunoVo.getNome().charAt(0)));
         letra.setForeground(Color.WHITE);
         letra.setFont(new Font("Arial", Font.BOLD, 20));
         perfil.add(letra);
@@ -431,8 +438,6 @@ public class JpTelaMensagens extends javax.swing.JFrame {
                 super.mouseExited(e); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
             }
 
-            VoLoginAluno loginUsuario = new VoLoginAluno();
-
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (JpPerfilContato.getComponentCount() > 0) {
@@ -463,7 +468,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
                 }
                 // Iniciando o SwingWorker para monitorar mensagens novas
                 monitoramento = iniciarMonitoramentoDeMensagem(
-                        loginUsuario.getEmail(),
+                        loginAlunoVo.getEmail(),
                         emailDestinatario
                 );
 
@@ -480,6 +485,7 @@ public class JpTelaMensagens extends javax.swing.JFrame {
     }
 
     private void chamandoPerfilContato(String nome, int r, int g, int b) {
+
 
         JpPerfilContato.setLayout(new GridBagLayout());
         JpPerfilContato.setBackground(Color.WHITE);
@@ -521,12 +527,6 @@ public class JpTelaMensagens extends javax.swing.JFrame {
         gbc.gridy = 0;
         JpPerfilContato.add(jlNome, gbc);
 
-        JLabel jlStatus = new JLabel("Offline");
-        gbc.insets = new Insets(1, 5, 5, 1);
-        jlStatus.setFont(fonte);
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        JpPerfilContato.add(jlStatus, gbc);
 
         MyButton jbBaixarHistorico = new MyButton();
         jbBaixarHistorico.setPreferredSize(new Dimension(40, 40));
@@ -584,10 +584,9 @@ public class JpTelaMensagens extends javax.swing.JFrame {
             if (!texto.isEmpty()) {
 
                 mtfdCampoEscreverMensagens.setText("");
-                VoLoginAluno loginAluno = new VoLoginAluno();
 
                 //salvando no banco a mensagem
-                salvandoMensagens(this.emailDestinatarioAtual, loginAluno.getEmail(), texto);
+                salvandoMensagens(this.emailDestinatarioAtual, loginAlunoVo.getEmail(), texto);
 
             }
 
@@ -673,16 +672,38 @@ public class JpTelaMensagens extends javax.swing.JFrame {
             String emailDono,
             String emailDestinatario
     ) {
+
         SwingWorker<Void, Object[]> worker = new SwingWorker<>() {
-            
+            //agendador de tarefas futuras
+            ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+            //newSingleThreadScheduledExecutor() -> Cria uma threand
+            Future<?> alertaCarregando = null;
 
             @Override
             protected Void doInBackground() throws Exception {
                 MensagemRN mensagens = new MensagemRN();
                 long ultimasQuantidade = 0;
-                
+
                 while (!isCancelled()) {
+                    alertaCarregando = scheduler.schedule(() -> {
+                        SwingUtilities.invokeLater(() -> {
+                            JLabel carregando = new JLabel("Carregando...");
+                            carregando.setFont(new Font("Arial", Font.PLAIN, 20));
+                            JpConversaAtual.add(carregando);
+                            JpConversaAtual.revalidate();
+                            JpConversaAtual.repaint();
+                        });
+                    }, 1200, TimeUnit.MILLISECONDS);  // aparece após 1200ms
+
                     Object[][] mensagensConversa = mensagens.buscandoMensagens(emailDono, emailDestinatario);
+
+                    alertaCarregando.cancel(true);
+
+                    if ("Conexão caiu".equals(mensagensConversa[0][0])) {
+                        publish(mensagensConversa[0]);
+                        cancel(true);
+                    }
+
                     long quantidadeAtual = mensagensConversa.length;
 
                     if (quantidadeAtual > ultimasQuantidade) {
@@ -700,13 +721,20 @@ public class JpTelaMensagens extends javax.swing.JFrame {
                         ultimasQuantidade = quantidadeAtual;
                     }
 
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                 }
                 return null;
             }
 
             @Override
             protected void process(List<Object[]> chunks) {
+
+                if ("Conexão caiu".equals(chunks.get(0)[0])) {
+                    ImageIcon imagem = new ImageIcon(getClass().getResource("/Imagens/wifiFraco30px.png"));
+                    JOptionPane.showMessageDialog(null, chunks.get(0)[0], "Wifi", JOptionPane.INFORMATION_MESSAGE, imagem);
+                    saindoDoLogin();
+                    return;
+                }
 
                 for (int i = 0; i < chunks.size(); i++) {
                     String texto = String.valueOf(chunks.get(i)[0]);
@@ -718,7 +746,6 @@ public class JpTelaMensagens extends javax.swing.JFrame {
 
                 super.process(chunks);
             }
-
         };
 
         worker.execute();
@@ -739,18 +766,21 @@ public class JpTelaMensagens extends javax.swing.JFrame {
     }
 
     private void saindoDoLogin() {
-        VoLoginAluno loginAluno = new VoLoginAluno();
-        loginAluno.setEmail("");
-        loginAluno.setNome("");
+        loginAlunoVo.setStatus("offline");
+        loginAlunoRN.mudarStatus(loginAlunoVo);
+
+        loginAlunoVo.setEmail("");
+        loginAlunoVo.setNome("");
+
         dispose();
+
         JpLogin telaLogin = new JpLogin();
         telaLogin.getTelaPrincipal().setVisible(true);
     }
 
     private void baixarHistoricoMensagens() {
-        VoLoginAluno loginUsuario = new VoLoginAluno();
 
-        String emailDono = loginUsuario.getEmail();
+        String emailDono = loginAlunoVo.getEmail();
         String emailDestinatario = emailDestinatarioAtual;
 
         MensagemRN mensagens = new MensagemRN();

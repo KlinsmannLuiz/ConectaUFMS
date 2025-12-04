@@ -29,7 +29,10 @@ public class MyButton extends JButton {
         setForeground(new Color(0, 82, 122));
         setCursor(new Cursor(Cursor.HAND_CURSOR));
         setContentAreaFilled(false);
-
+        setBorderPainted(false);
+        setFocusPainted(false);
+        setOpaque(false);
+        
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {

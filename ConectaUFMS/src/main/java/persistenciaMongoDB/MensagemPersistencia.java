@@ -5,6 +5,8 @@
 package persistenciaMongoDB;
 
 import Vo.VoMensagem;
+import com.mongodb.MongoSocketException;
+import com.mongodb.MongoTimeoutException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -66,6 +68,9 @@ public class MensagemPersistencia {
             }
             //converter a lista para Array
             return lista.toArray(Object[][]::new);
+            
+        } catch (MongoSocketException | MongoTimeoutException e) {
+            return new Object[][]{{"Conexão caiu", null}};
             
         } catch (Exception e) {
             return new Object[][]{{"Erro de banco", null}};

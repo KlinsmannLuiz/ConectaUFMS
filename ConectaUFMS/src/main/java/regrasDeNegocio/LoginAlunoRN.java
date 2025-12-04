@@ -39,7 +39,7 @@ public class LoginAlunoRN {
         this.usuarioExistente = usuarioExistente;
     }
 
-    public LoginAlunoRN(VoLoginAluno loginAluno) {
+    public void verificandoLoginAlunoRN(VoLoginAluno loginAluno) {
         LoginAlunoPersistencia.loginAluno(loginAluno);
         String[] resultadoLogin = loginAluno.getLoginBanco();
         
@@ -53,6 +53,7 @@ public class LoginAlunoRN {
 
                 if (resultadoLogin[2].equals(new String(loginAluno.getSenha()))) {
                     setSenhaUsuarioExiste(true);
+                    mudarStatus(loginAluno); // atualizando status
                 } else {
 
                     setSenhaUsuarioExiste(false);
@@ -62,6 +63,14 @@ public class LoginAlunoRN {
             setConectaBancoExiste(true);
         }
 
+    }
+    
+    public String verificaStatus(String emailDestinatario){
+        return LoginAlunoPersistencia.verificandoStatus(emailDestinatario);
+    }
+    
+    public void mudarStatus(VoLoginAluno loginAluno){
+        LoginAlunoPersistencia.atualizarStatus(loginAluno);
     }
 
 }
